@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a class="back-link" href="/artist3">← Back to fro.nea</a>
+
+<section class="album-page">
+
+    <div class="album-header">
+
+        <img
+            class="album-cover-large"
+            src="{{ url_for('static', filename='Images/artist2.jpg') }}"
+            alt="The Unspoken Master">
+
+        <div>
+            <p class="label">Album</p>
+            <h1>The Unspoken Master</h1>
+            <p class="subtitle">fro.nea • Original Collection</p>
+        </div>
+
+    </div>
+
+    <section class="tracklist">
+
+        <h2>Tracklist</h2>
+
+        <div class="track">
+            <span>1. Unspoken Master</span>
+
+            <audio controls>
+                <source
+                    src="{{ url_for('static', filename='Audio/unspoken master.mp3') }}"
+                    type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="track">
+            <span>2. less is more</span>
+
+            <audio controls>
+                <source
+                    src="{{ url_for('static', filename='Audio/less is more.wav') }}"
+                    type="audio/wav">
+            </audio>
+        </div>
+
+        <div class="track">
+            <span>3. Live A Little (OG Mix)</span>
+
+            <audio controls>
+                <source
+                    src="{{ url_for('static', filename='Audio/Live A Little (OG Mix).mp3') }}"
+                    type="audio/mpeg">
+            </audio>
+        </div>
+
+    </section>
+
+    <section class="album-bio">
+
+        <h2>Album Bio</h2>
+
+        <p>
+            The Unspoken Master is an original collection by fro.nea.
+            It explores atmosphere, texture, space, and visual sound
+            through a quiet experimental lens.
+        </p>
+
+    </section>
+
+</section>
+{% extends "base.html" %}
+
+{% block content %}
+
+<a class="back-link" href="/artist3">← Back</a>
+
+<section class="album-page">
+
+    <div class="album-header">
+
+        <img class="album-cover-large"
+             src="{{ url_for('static', filename='Images/artist2.jpg') }}">
+
+        <div>
+
+            <p class="label">Album</p>
+
+            <h1>The Unspoken Master</h1>
+
+            <p class="subtitle">fro.nea</p>
+
+        </div>
+
+    </div>
+
+    {% if not current_user.is_authenticated %}
+
+    <div class="preview-warning">
+
+        <h2>Preview Mode</h2>
+
+        <p>Guests can only listen to 7-second previews.</p>
+
+        <a href="/signup">Create Account</a>
+
+        <a href="/login">Login</a>
+
+    </div>
+
+    {% endif %}
+
+    <section class="tracklist">
+
+        <h2>Tracklist</h2>
+
+        <div class="track">
+            <span>Unspoken Master</span>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/unspoken master.mp3') }}">
+            </audio>
+        </div>
+
+        <div class="track">
+            <span>Less Is More</span>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/less is more.wav') }}">
+            </audio>
+        </div>
+
+        <div class="track">
+            <span>Live A Little (OG Mix)</span>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/Live A Little (OG Mix).mp3') }}">
+            </audio>
+        </div>
+
+    </section>
+
+</section>
+
+<script>
+
+const isAuthenticated = JSON.parse(
+    '{{ "true" if current_user.is_authenticated else "false" }}'
+);
+
+const audioPlayers = document.querySelectorAll("audio");
+
+audioPlayers.forEach((player) => {
+
+    let previewAlertShown = false;
+
+    player.addEventListener("timeupdate", () => {
+
+        if (!isAuthenticated && player.currentTime >= 7) {
+
+            player.pause();
+
+            player.currentTime = 0;
+
+            if (!previewAlertShown) {
+
+                previewAlertShown = true;
+
+                alert(
+                    "Preview ended. Login or create an account for full playback."
+                );
+            }
+        }
+    });
+});
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="artist-profile-page">
+
+    <!-- BACK BUTTON -->
+    <a class="back-link" href="/">← Home</a>
+
+    <!-- HERO -->
+    <section class="artist-hero justin-hero-bg">
+
+        <div class="artist-hero-overlay">
+
+            <img
+                class="artist-profile-pic"
+                src="{{ url_for('static', filename='Images/artist1.jpg') }}"
+                alt="Justin.url">
+
+            <div class="artist-hero-text">
+
+                <p class="label">Artist</p>
+
+                <h1>Justin.url</h1>
+
+                <p class="subtitle">
+                    Bass • Producer • Composer
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ALBUMS -->
+    <section class="albums-section">
+
+        <h2>Albums</h2>
+
+        <!-- MAN VS MACHINE -->
+        <a class="album-card"
+           href="{{ url_for('man_vs_machine') }}">
+
+            <img
+                class="album-cover"
+                src="{{ url_for('static', filename='Images/Man_Vs_Machine_cover.jpg') }}"
+                alt="Man Vs Machine">
+
+            <div class="album-info">
+
+                <h3>Man Vs Machine</h3>
+
+                <p>Visual Sound Collection</p>
+
+            </div>
+
+        </a>
+
+    </section>
+
+</section>
+
+{% endblock %}

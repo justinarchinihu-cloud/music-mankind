@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="album-page">
+
+    <a class="back-link" href="/artist2">← Back to Evan Anderson</a>
+
+    <section class="album-hero">
+
+        <img
+            class="album-cover-large"
+            src="{{ url_for('static', filename='Images/half_it_all_cover.jpg') }}"
+            alt="Half It All">
+
+        <div class="album-info">
+
+            <p class="label">Album</p>
+
+            <h1>Half It All</h1>
+
+            <p class="subtitle">Evan Anderson Trio • Released April 26, 2026</p>
+
+        </div>
+
+    </section>
+
+    <section class="tracklist">
+
+        <h2>Tracklist</h2>
+
+        <div class="track">
+            <p>1. Aomame</p>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/aomame.mp3') }}" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="track">
+            <p>2. Ayn</p>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/ayn.mp3') }}" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="track">
+            <p>3. Ronin</p>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/Ronin.mp3') }}" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="track">
+            <p>4. Heal</p>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/heal.mp3') }}" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="track">
+            <p>5. Townhouse</p>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/TownHouse.mp3') }}" type="audio/mpeg">
+            </audio>
+        </div>
+
+    </section>
+
+    <section class="album-bio">
+
+        <h2>Album Bio</h2>
+
+        <p>
+            This record came about when my friend and producer, D’Andre Neal, messaged me about recording.
+            He asked if me and my band wanted to come to Valencia College, where he works as a part of the studio’s staff.
+            We set a date and I began to write some music. Originally this was supposed to be a quartet record with my band that was developed in Jacksonville Florida.
+            The group consisted of Tyler Snell on Tenor, Justin Archinihu on bass, Ethan Grussgott on drums, and myself.
+            The tunes I wrote for this session had that band in mind.
+        </p>
+
+        <p>
+            Tyler wasn't able to make the session, so I decided we should just do it all trio.
+            The tunes I wrote worked surprisingly well for trio playing. They lent themselves to interaction.
+            Trio playing, to me, is all about interacting. With such a small ensemble the music doesn't need to be solo after solo.
+            Rather, the trio setting lends itself to the songs unfolding on their own. Soloing becomes less important than the ensemble working together as a whole.
+            I imagine trio playing like three people rowing a boat. We may be using the paddles all differently but the overall projection of the boat is the focus.
+        </p>
+
+        <p>
+            I wrote all the tunes on this record besides one. Ethan Grussgott wrote the tune “Ronin”.
+            To me this tune is how I wanted the whole record to feel. Ethan didn't like it.
+            I think sometimes it takes someone else bringing something to the table to take you out of yourself and see what you were really going for.
+            I tried to do something similar to Ethan’s tune on my tune, “Aomame”.
+            For the first 8 measures of my tune there are no changes. Ethan’s tune has no changes at all — just a melody and time.
+            It's completely free. At that point in my life I was too afraid to write something completely free, even though it was the feeling I was going for.
+            I was scared of letting go of my idea of music, or at least what I thought my music was.
+            These days I am learning how to let go of all my ideas of music. To be free.
+        </p>
+
+        <p>
+            This record was also a sort of a farewell to friends and an era of life.
+            Ethan, Justin, and I had spent the past three years of our lives learning how to play music together and we were all going our separate ways in the months coming after this recording.
+            Ethan moved to Colorado, Justin stayed in Jacksonville, and I moved to New York.
+            Those two guys were the two people I spent most of my time with for those years.
+            We had moments of being pissed at each other, loving each other, trying to understand each other, not understanding each other, and finally trying to accept each other.
+            When I listen back to this record I can hear all of that in it.
+        </p>
+
+        <p>
+            I've struggled with whether I should release this recording for a while now.
+            I am not super happy with my playing here and I feel like I have gotten much better since then.
+            But I can hear us fighting with each other and ourselves here. I can hear each of our personalities in this recording.
+            We were really trying to find ourselves and how we fit in with one another here.
+            This record may not be where I wanted it to be on a technical level but I think this recording is interesting and tells a story of friendship and angst.
+            We were and are still young, stubborn, and always learning.
+        </p>
+
+        <h2>Credits</h2>
+
+        <p>
+            Evan Anderson — Composer, Piano<br>
+            Ethan Grussgott — Composer, Drumset<br>
+            Justin Archinihu — Bass<br>
+            D’Andre Neal — Producer, Engineer<br>
+            Jack Miller — Mix, Master<br>
+            Tea Runjaic — Designer
+        </p>
+
+    </section>
+
+</section>
+{% extends "base.html" %}
+
+{% block content %}
+
+<a class="back-link" href="/artist2">← Back</a>
+
+<section class="album-page">
+
+    <div class="album-header">
+
+        <img class="album-cover-large"
+             src="{{ url_for('static', filename='Images/half_it_all_cover.jpg') }}">
+
+        <div>
+
+            <p class="label">Album</p>
+
+            <h1>Half It All</h1>
+
+            <p class="subtitle">Evan Anderson</p>
+
+        </div>
+
+    </div>
+
+    {% if not current_user.is_authenticated %}
+
+    <div class="preview-warning">
+
+        <h2>Preview Mode</h2>
+
+        <p>Guests can only listen to 7-second previews.</p>
+
+        <a href="/signup">Create Account</a>
+
+        <a href="/login">Login</a>
+
+    </div>
+
+    {% endif %}
+
+    <section class="tracklist">
+
+        <h2>Tracklist</h2>
+
+        <div class="track">
+            <span>Aomame</span>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/aomame.mp3') }}">
+            </audio>
+        </div>
+
+        <div class="track">
+            <span>Ayn</span>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/ayn.mp3') }}">
+            </audio>
+        </div>
+
+        <div class="track">
+            <span>Ronin</span>
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/Ronin.mp3') }}">
+            </audio>
+        </div>
+
+    </section>
+
+</section>
+
+<script>
+
+const isAuthenticated = JSON.parse(
+    '{{ "true" if current_user.is_authenticated else "false" }}'
+);
+
+const audioPlayers = document.querySelectorAll("audio");
+
+audioPlayers.forEach((player) => {
+
+    let previewAlertShown = false;
+
+    player.addEventListener("timeupdate", () => {
+
+        if (!isAuthenticated && player.currentTime >= 7) {
+
+            player.pause();
+
+            player.currentTime = 0;
+
+            if (!previewAlertShown) {
+
+                previewAlertShown = true;
+
+                alert(
+                    "Preview ended. Login or create an account for full playback."
+                );
+            }
+        }
+    });
+});
+
+</script>
+
+{% endblock %}

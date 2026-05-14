@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="album-page">
+
+    <a class="back-link" href="/artist1">
+        ← Back to Justin.url
+    </a>
+
+    <section class="album-hero">
+
+        <img
+            class="album-cover-large"
+            src="{{ url_for('static', filename='Images/Man_Vs_Machine_cover.jpg') }}"
+            alt="Man Vs. Machine">
+
+        <div class="album-info">
+            <p class="label">Album</p>
+            <h1>Man Vs. Machine</h1>
+            <p class="subtitle">Visual Sound Collection</p>
+        </div>
+
+    </section>
+
+    <section class="tracklist">
+
+        <h2>Tracklist</h2>
+
+        <div class="track">
+            <p>1. Drum And Bass</p>
+
+            <audio controls preload="metadata">
+                <source
+                    src="{{ url_for('static', filename='Audio/drum_and_bass.m4a') }}"
+                    type="audio/mp4">
+            </audio>
+        </div>
+
+        <div class="track">
+            <p>2. Everything I Need</p>
+
+            <audio controls preload="metadata">
+                <source
+                    src="{{ url_for('static', filename='Audio/everything_i_need.m4a') }}"
+                    type="audio/mp4">
+            </audio>
+        </div>
+
+    </section>
+
+    <section class="album-bio">
+
+        <h2>Album Bio</h2>
+
+        <p>
+            Man Vs. Machine explores the tension between human emotion
+            and modern technology through layered bass textures,
+            ambient production, cinematic sound design, and improvisation.
+        </p>
+
+        <h2>Credits</h2>
+
+        <p>
+            Justin Archinihu — Bass, Composition, Production<br>
+            Additional Production — Add name here<br>
+            Mix / Master — Add name here<br>
+            Visual Design — Add name here
+        </p>
+
+    </section>
+
+</section>
+<script>
+    const isAuthenticated = JSON.parse(
+        '{{ "true" if current_user.is_authenticated else "false" }}'
+    );
+
+    const audioPlayers = document.querySelectorAll("audio");
+
+    audioPlayers.forEach((player) => {
+        let previewAlertShown = false;
+
+        player.addEventListener("timeupdate", () => {
+            if (!isAuthenticated && player.currentTime >= 7) {
+                player.pause();
+                player.currentTime = 0;
+
+                if (!previewAlertShown) {
+                    previewAlertShown = true;
+                    alert("Preview ended. Login or create an account for full playback.");
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

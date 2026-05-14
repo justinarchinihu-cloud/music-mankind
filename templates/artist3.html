@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="album-page">
+
+    <!-- BACK -->
+    <a class="back-link" href="/artist3">
+        ← Back to fro.nea
+    </a>
+
+    <!-- HERO -->
+    <section class="album-hero">
+
+        <img
+            class="album-cover-large"
+            src="{{ url_for('static', filename='Images/artist2.jpg') }}"
+            alt="The Unspoken Master">
+
+        <div class="album-info">
+
+            <p class="label">Album</p>
+
+            <h1>The Unspoken Master</h1>
+
+            <p class="subtitle">
+                fro.nea • Original Collection
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- TRACKLIST -->
+    <section class="tracklist">
+
+        <h2>Tracklist</h2>
+
+        <!-- TRACK 1 -->
+        <div class="track">
+
+            <p>1. Unspoken Master</p>
+
+            <audio controls>
+                <source
+                    src="{{ url_for('static', filename='Audio/unspoken master.mp3') }}"
+                    type="audio/mpeg">
+            </audio>
+
+        </div>
+
+        <!-- TRACK 2 -->
+        <div class="track">
+
+            <p>2. Less Is More</p>
+
+            <audio controls>
+                <source
+                    src="{{ url_for('static', filename='Audio/less is more.wav') }}"
+                    type="audio/wav">
+            </audio>
+
+        </div>
+
+        <!-- TRACK 3 -->
+        <div class="track">
+
+            <p>3. Live A Little (OG Mix)</p>
+
+            <audio controls>
+                <source
+                    src="{{ url_for('static', filename='Audio/Live A Little (OG Mix).mp3') }}"
+                    type="audio/mpeg">
+            </audio>
+
+        </div>
+
+    </section>
+
+    <!-- BIO -->
+    <section class="album-bio">
+
+        <h2>Album Bio</h2>
+
+        <p>
+            The Unspoken Master is an original collection by fro.nea,
+            centered around atmosphere, texture, spatial movement,
+            and visual sound experimentation.
+        </p>
+
+        <p>
+            The project explores the emotional tension between silence
+            and density through layered ambient production,
+            manipulated recordings, and cinematic sound design.
+            Each composition acts as a visual environment,
+            designed to feel immersive rather than traditionally structured.
+        </p>
+
+        <p>
+            The collection embraces minimalism, abstraction,
+            and emotional ambiguity,
+            allowing the listener to interpret meaning freely.
+            Rather than focusing on technical perfection,
+            the project prioritizes mood, tone,
+            and sensory experience.
+        </p>
+
+        <!-- CREDITS -->
+
+        <h2>Credits</h2>
+
+        <p>
+            fro.nea — Composition, Production, Visual Direction<br>
+            Additional Sound Design — Add name here<br>
+            Mix / Master — Add name here
+        </p>
+
+    </section>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="visualizer-page">
+
+    <a class="back-link" href="/">← Home</a>
+
+    <div class="visualizer-header">
+
+        <p class="visualizer-label">Audio Tool</p>
+
+        <h1>EQ + Frequency Visualizer</h1>
+
+        <p class="visualizer-subtitle">
+            Drag a Music Mankind song card into the equalizer to begin mixing and EQ’ing in real time.
+        </p>
+
+    </div>
+
+    {% if not current_user.is_authenticated %}
+
+    <div class="preview-warning">
+
+        <h2>Preview Mode</h2>
+
+        <p>
+            Guests can listen to 7-second previews only.
+            Login or create an account for full playback and EQ access.
+        </p>
+
+        <div class="locked-buttons">
+
+            <a class="auth-btn" href="/signup">Create Account</a>
+
+            <a class="auth-btn" href="/login">Login</a>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <section class="visualizer-panel">
+
+        <h2 class="visualizer-section-title">Available Songs</h2>
+
+        <div class="song-card-grid">
+
+            {% for song in songs %}
+
+            <div
+                class="visualizer-song-card"
+                draggable="true"
+                data-src="{{ url_for('static', filename=song.file) }}"
+                data-title="{{ song.title }}"
+                data-artist="{{ song.artist }}"
+                data-album="{{ song.album }}"
+                data-cover="{{ url_for('static', filename=song.cover) }}">
+
+                <img
+                    class="visualizer-song-cover"
+                    src="{{ url_for('static', filename=song.cover) }}"
+                    alt="{{ song.album }}">
+
+                <div class="visualizer-song-info">
+
+                    <h3>{{ song.title }}</h3>
+
+                    <p>{{ song.artist }}</p>
+
+                    <span>{{ song.album }}</span>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div id="dropZone" class="eq-drop-zone">
+
+            <p>Drag a song here to load it into the EQ</p>
+
+        </div>
+
+        <div class="now-playing-box">
+
+            <img
+                id="currentSongCover"
+                class="now-playing-cover"
+                src="{{ url_for('static', filename='Images/Man_Vs_Machine_cover.jpg') }}"
+                alt="Current song cover">
+
+            <div class="now-playing-info">
+
+                <p class="now-playing-label">Now Playing</p>
+
+                <h2 id="currentSongTitle">No song selected</h2>
+
+                <p id="currentSongArtist">
+                    Choose or drag a track from above.
+                </p>
+
+                <p id="currentSongAlbum"></p>
+
+            </div>
+
+        </div>
+
+        <audio id="audioPlayer" controls></audio>
+
+        {% if current_user.is_authenticated %}
+
+        <div class="eq-controls">
+
+            <label>
+                Bass
+                <span id="bassValue">0 dB</span>
+                <input type="range" id="bass" min="-30" max="30" value="0">
+            </label>
+
+            <label>
+                Mid
+                <span id="midValue">0 dB</span>
+                <input type="range" id="mid" min="-30" max="30" value="0">
+            </label>
+
+            <label>
+                Treble
+                <span id="trebleValue">0 dB</span>
+                <input type="range" id="treble" min="-30" max="30" value="0">
+            </label>
+
+        </div>
+
+        {% endif %}
+
+        <canvas id="visualizer"></canvas>
+
+    </section>
+
+</section>
+
+<script>
+
+    const isAuthenticated = JSON.parse(
+        '{{ "true" if current_user.is_authenticated else "false" }}'
+    );
+
+</script>
+
+<script src="{{ url_for('static', filename='visualizer.js') }}"></script>
+
+{% endblock %}

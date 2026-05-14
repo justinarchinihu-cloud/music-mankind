@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Music Mankind</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="home-page">
+
+<nav>
+  <a href="/">Home</a>
+  <a href="/gallery">Gallery</a>
+  <a href="/music">Music</a>
+</nav>
+
+<h1 class="site-title">Music Mankind</h1>
+
+<div class="artist-grid">
+
+  <a href="/justin" class="artist-card">
+    <img src="{{ url_for('static', filename='Images/artist1.jpg') }}">
+    <h2>Justin.url</h2>
+  </a>
+
+  <a href="/evan" class="artist-card">
+    <img src="{{ url_for('static', filename='Images/artist3.jpg') }}">
+    <h2>Evan Anderson</h2>
+  </a>
+
+  <a href="/fro-nea" class="artist-card">
+    <img src="{{ url_for('static', filename='Images/artist2.jpg') }}">
+    <h2>fro.nea</h2>
+  </a>
+
+</div>
+
+</body>
+</html>

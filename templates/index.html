@@ -1,0 +1,86 @@
+<!-- templates/index.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="home-page">
+
+    <!-- TORUS BACKGROUND -->
+    <div class="torus-background"></div>
+
+    <!-- TITLE -->
+    <div class="home-title">
+
+        {% if current_user.is_authenticated %}
+            <h1 class="welcome-user">
+                Welcome, {{ current_user.username }}
+            </h1>
+        {% else %}
+            <h1 class="main-home-title">
+                Music Mankind
+            </h1>
+        {% endif %}
+
+        <h2>Your Library</h2>
+
+    </div>
+
+    <!-- ARTIST GRID -->
+    <div class="artist-grid">
+
+        <!-- JUSTIN -->
+        <a class="artist-card" href="/artist1">
+
+            <img
+                src="{{ url_for('static', filename='Images/artist1.jpg') }}"
+                alt="Justin.url">
+
+            <h3>Justin.url</h3>
+
+            <p>Bassist • Jacksonville</p>
+
+        </a>
+
+        <!-- EVAN -->
+        <a class="artist-card" href="/artist2">
+
+            <img
+                src="{{ url_for('static', filename='Images/artist3.jpg') }}"
+                alt="Evan Anderson">
+
+            <h3>Evan Anderson</h3>
+
+            <p>Piano • Composer</p>
+
+        </a>
+
+        <!-- FRO.NEA -->
+        <a class="artist-card" href="/artist3">
+
+            <img
+                src="{{ url_for('static', filename='Images/artist2.jpg') }}"
+                alt="fro.nea">
+
+            <h3>fro.nea</h3>
+
+            <p>Visual Sound Collection</p>
+
+        </a>
+
+        <!-- CALVIN -->
+        <a class="artist-card" href="/calvin_nook">
+
+            <div class="home-black-circle"></div>
+
+            <h3>calvin_nook</h3>
+
+            <p>Short Story Collection</p>
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

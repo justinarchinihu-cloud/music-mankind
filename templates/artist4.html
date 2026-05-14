@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a class="back-link" href="/">← Home</a>
+
+<section class="artist-profile-page">
+
+    <!-- ARTIST HERO -->
+    <div class="artist-hero ARTIST-BG-CLASS">
+
+        <div class="artist-hero-overlay">
+
+            <img
+                class="artist-profile-pic"
+                src="{{ url_for('static', filename='Images/ARTIST_IMAGE.jpg') }}"
+                alt="ARTIST NAME">
+
+            <div>
+                <p class="label">Artist</p>
+
+                <h1>ARTIST NAME</h1>
+
+                <p class="subtitle">
+                    ROLE • ROLE • ROLE
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ALBUM SECTION -->
+    <section class="albums-section">
+
+        <h2>Albums</h2>
+
+        <!-- ALBUM CARD -->
+        <a class="album-card" href="/ALBUM_ROUTE">
+
+            <img
+                class="album-cover"
+                src="{{ url_for('static', filename='Images/ALBUM_COVER.jpg') }}"
+                alt="ALBUM NAME">
+
+            <div class="album-info">
+
+                <h3>ALBUM NAME</h3>
+
+                <p>
+                    ALBUM DESCRIPTION
+                </p>
+
+            </div>
+
+        </a>
+
+        <!-- COPY MORE ALBUM CARDS BELOW -->
+
+        <!--
+        <a class="album-card" href="/SECOND_ALBUM_ROUTE">
+
+            <img
+                class="album-cover"
+                src="{{ url_for('static', filename='Images/SECOND_ALBUM.jpg') }}"
+                alt="Second Album">
+
+            <div class="album-info">
+
+                <h3>Second Album</h3>
+
+                <p>
+                    Album Description
+                </p>
+
+            </div>
+
+        </a>
+        -->
+
+    </section>
+
+</section>
+
+{% endblock %}

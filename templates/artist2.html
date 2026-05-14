@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a class="back-link" href="/">← Home</a>
+
+<section class="artist-profile-page">
+
+    <div class="artist-hero evan-hero-bg">
+
+        <div class="artist-hero-overlay">
+
+            <img class="artist-profile-pic"
+                 src="{{ url_for('static', filename='Images/artist3.jpg') }}"
+                 alt="Evan Anderson">
+
+            <div>
+                <p class="label">Artist</p>
+                <h1>Evan Anderson</h1>
+                <p class="subtitle">Piano • Composer</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <section class="albums-section">
+
+        <h2>Albums</h2>
+
+        <div class="album-card">
+
+            <a href="/half-it-all">
+                <img
+                    class="album-cover"
+                    src="{{ url_for('static', filename='Images/half_it_all_cover.jpg') }}"
+                    alt="Half It All">
+            </a>
+
+            <div class="album-info">
+                <h3>Half It All</h3>
+                <p>Evan Anderson Trio</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+{% endblock %}

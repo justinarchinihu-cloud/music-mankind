@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="library-page">
+    <h1>Your Library</h1>
+
+    {% if purchases %}
+        {% for purchase in purchases %}
+            <div class="track">
+                <p>{{ purchase.song_title }}</p>
+                <p>$0.99 purchased</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>You have not purchased any songs yet.</p>
+    {% endif %}
+</section>
+
+{% endblock %}
