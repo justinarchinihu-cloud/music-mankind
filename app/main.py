@@ -66,6 +66,11 @@ def artist3():
     return render_template("artist3.html")
 
 
+@app.route("/artist4")
+def artist4():
+    return render_template("artist4.html")
+
+
 @app.route("/calvin_nook")
 def calvin_nook():
     return render_template("calvin_nook.html")

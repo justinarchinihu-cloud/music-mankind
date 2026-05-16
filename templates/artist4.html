@@ -2,81 +2,152 @@
 
 {% block content %}
 
-<a class="back-link" href="/">← Home</a>
-
 <section class="artist-profile-page">
 
-    <!-- ARTIST HERO -->
-    <div class="artist-hero ARTIST-BG-CLASS">
+    <!-- BACK BUTTON -->
+    <a class="back-link" href="/">
+        ← Home
+    </a>
+
+    <!-- HERO -->
+    <section class="artist-hero Eseohe-hero-bg">
 
         <div class="artist-hero-overlay">
 
             <img
                 class="artist-profile-pic"
-                src="{{ url_for('static', filename='Images/ARTIST_IMAGE.jpg') }}"
-                alt="ARTIST NAME">
+                src="{{ url_for('static', filename='Images/daniel.png') }}"
+                alt="Eseohe">
 
-            <div>
+            <div class="artist-hero-text">
+
                 <p class="label">Artist</p>
 
-                <h1>ARTIST NAME</h1>
+                <h1>Eseohe</h1>
 
                 <p class="subtitle">
-                    ROLE • ROLE • ROLE
+                    R&B • Producer • Songwriter
                 </p>
+
             </div>
 
         </div>
 
-    </div>
+    </section>
 
-    <!-- ALBUM SECTION -->
+    <!-- BIO -->
+    <section class="album-bio">
+
+        <h2>Artist Bio</h2>
+
+        <p>
+            Eseohe is part of a new generation of R&B artists
+            bringing emotional vulnerability,
+            melodic storytelling,
+            and early-2000s influence back into modern music.
+            Blending smooth vocals with polished production,
+            his sound draws inspiration from artists like
+            Usher, Chris Brown, and Ne-Yo
+            while still feeling fresh for today’s era of R&B.
+        </p>
+
+        <p>
+            Known for records centered around romance,
+            tension, heartbreak, and attraction,
+            Eseohe has begun building momentum through
+            emotionally driven releases like “Friend Zone.”
+            His ability to blend nostalgic R&B textures
+            with modern melodies and replay-worthy hooks
+            helps him stand out among a new wave of artists
+            helping revive the genre.
+        </p>
+
+        <p>
+            Focused on creating a strong artistic identity
+            rather than chasing trends,
+            Eseohe continues to build a world around his music
+            through carefully crafted releases,
+            cinematic visuals,
+            and emotionally charged performances.
+            Whether delivering intimate slow jams
+            or more confident records,
+            his music remains rooted in emotion,
+            melody, and connection.
+        </p>
+
+    </section>
+
+    <!-- SINGLES SECTION -->
+
     <section class="albums-section">
 
-        <h2>Albums</h2>
+        <h2>Singles</h2>
 
-        <!-- ALBUM CARD -->
-        <a class="album-card" href="/ALBUM_ROUTE">
+        <!-- SINGLE 1 -->
+        <a class="album-card" href="#">
 
             <img
                 class="album-cover"
-                src="{{ url_for('static', filename='Images/ALBUM_COVER.jpg') }}"
-                alt="ALBUM NAME">
+                src="{{ url_for('static', filename='Images/oneofthem.png') }}"
+                alt="One of Them Cover">
 
             <div class="album-info">
 
-                <h3>ALBUM NAME</h3>
+                <h3>One of Them</h3>
 
-                <p>
-                    ALBUM DESCRIPTION
-                </p>
+                <p>Eseohe • Single</p>
 
             </div>
 
         </a>
 
-        <!-- COPY MORE ALBUM CARDS BELOW -->
+        <!-- AUDIO PLAYER -->
+        <div class="track">
 
-        <!--
-        <a class="album-card" href="/SECOND_ALBUM_ROUTE">
+            <p>One of Them</p>
+
+            <audio controls>
+                <source
+                    src="{{ url_for('static', filename='Audio/One of them.mp3') }}"
+                    type="audio/mpeg">
+
+                Your browser does not support the audio element.
+            </audio>
+
+        </div>
+
+        <!-- SINGLE 2 -->
+        <a class="album-card" href="#">
 
             <img
                 class="album-cover"
-                src="{{ url_for('static', filename='Images/SECOND_ALBUM.jpg') }}"
-                alt="Second Album">
+                src="{{ url_for('static', filename='Images/daniel.png') }}"
+                alt="Friend Zone">
 
             <div class="album-info">
 
-                <h3>Second Album</h3>
+                <h3>Friend Zone</h3>
 
-                <p>
-                    Album Description
-                </p>
+                <p>Eseohe • Single</p>
 
             </div>
 
         </a>
-        -->
+
+        <!-- AUDIO PLAYER -->
+        <div class="track">
+
+            <p>Friend Zone</p>
+
+            <audio controls>
+                <source
+                    src="{{ url_for('static', filename='Audio/Friend zone (1).mp3') }}"
+                    type="audio/mpeg">
+
+                Your browser does not support the audio element.
+            </audio>
+
+        </div>
 
     </section>
 
