@@ -2,44 +2,236 @@
 
 {% block content %}
 
-<section class="intro">
-    <h2>Your Library</h2>
-    <p>Create artist pages and featured collections.</p>
-</section>
+<section class="music-library-page">
 
-<section class="main-library">
-    <h1>Music Mankind</h1>
-    <h2>Your Library</h2>
+    <div class="torus-background"></div>
 
-    <div class="artist-row">
+    <div class="music-library-overlay">
 
-        <a class="artist-card" href="/artist1">
-            <div class="artist-image">
-                <img src="{{ url_for('static', filename='Images/artist1.jpg') }}" alt="Justin.url">
-            </div>
-            <h3>Justin.url</h3>
-        </a>
+        <div class="music-library-header">
 
-        <a class="artist-card" href="/artist2">
-            <div class="artist-image">
-                <img src="{{ url_for('static', filename='Images/artist3.jpg') }}" alt="Evan Anderson">
-            </div>
-            <h3>Evan Anderson</h3>
-        </a>
+            <p class="music-library-label">
+                Music Library
+            </p>
 
-        <a class="artist-card" href="/artist3">
-            <div class="artist-image empty"></div>
-            <h3>fro.nea</h3>
-        </a>
+            <h1 class="music-library-title">
+                Music Mankind
+            </h1>
 
-        <a class="artist-card" href="/calvin_nook">
-            <div class="artist-image">
-                <img src="{{ url_for('static', filename='Images/half_it_all_cover.jpg') }}" alt="calvin_nook">
-            </div>
-            <h3>calvin_nook</h3>
-        </a>
+            <p class="music-library-subtitle">
+                Browse artists, songs, and uploaded music.
+            </p>
+
+        </div>
+
+        <div class="music-search-container">
+
+            <input
+                type="text"
+                id="songSearch"
+                placeholder="Search artists, songs, or albums..."
+            >
+
+        </div>
+
+        <div
+            class="music-results-grid"
+            id="songGrid"
+        >
+
+            <!-- DYNAMIC UPLOADS -->
+
+            {% for upload in uploads %}
+
+            <a
+                class="music-song-card"
+                href="/audio-visualizer"
+
+                data-title="{{ upload.artist_role }}"
+                data-artist="{{ upload.artist_name }}"
+                data-album="{{ upload.album_name }}"
+            >
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='Images/' + upload.image_filename
+                    ) }}"
+                >
+
+                <div class="music-song-info">
+
+                    <h2>
+                        {{ upload.artist_role }}
+                    </h2>
+
+                    <p>
+                        {{ upload.artist_name }}
+                    </p>
+
+                    <span>
+                        {{ upload.album_name }}
+                    </span>
+
+                </div>
+
+            </a>
+
+            {% endfor %}
+
+            <!-- FALLBACK SONGS -->
+
+            <a
+                class="music-song-card"
+                href="/man-vs-machine"
+
+                data-title="Drum And Bass"
+                data-artist="Justin.url"
+                data-album="Man Vs. Machine"
+            >
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='Images/Man_Vs_Machine_cover.jpg'
+                    ) }}"
+                >
+
+                <div class="music-song-info">
+
+                    <h2>
+                        Drum And Bass
+                    </h2>
+
+                    <p>
+                        Justin.url
+                    </p>
+
+                    <span>
+                        Man Vs. Machine
+                    </span>
+
+                </div>
+
+            </a>
+
+            <a
+                class="music-song-card"
+                href="/half-it-all"
+
+                data-title="Ronin"
+                data-artist="Evan Anderson"
+                data-album="Half It All"
+            >
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='Images/half_it_all_cover.jpg'
+                    ) }}"
+                >
+
+                <div class="music-song-info">
+
+                    <h2>
+                        Ronin
+                    </h2>
+
+                    <p>
+                        Evan Anderson
+                    </p>
+
+                    <span>
+                        Half It All
+                    </span>
+
+                </div>
+
+            </a>
+
+            <a
+                class="music-song-card"
+                href="/artist4"
+
+                data-title="Friend Zone"
+                data-artist="Eseohe"
+                data-album="Singles"
+            >
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='Images/daniel.png'
+                    ) }}"
+                >
+
+                <div class="music-song-info">
+
+                    <h2>
+                        Friend Zone
+                    </h2>
+
+                    <p>
+                        Eseohe
+                    </p>
+
+                    <span>
+                        Singles
+                    </span>
+
+                </div>
+
+            </a>
+
+        </div>
 
     </div>
+
 </section>
+
+<script>
+
+const searchInput =
+    document.getElementById("songSearch");
+
+const songCards =
+    document.querySelectorAll(".music-song-card");
+
+searchInput.addEventListener("input", function () {
+
+    const searchValue =
+        searchInput.value.toLowerCase();
+
+    songCards.forEach(function(card) {
+
+        const title =
+            card.dataset.title.toLowerCase();
+
+        const artist =
+            card.dataset.artist.toLowerCase();
+
+        const album =
+            card.dataset.album.toLowerCase();
+
+        const combined =
+            title + " " +
+            artist + " " +
+            album;
+
+        if (combined.includes(searchValue)) {
+
+            card.style.display = "flex";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+});
+
+</script>
 
 {% endblock %}

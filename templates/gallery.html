@@ -1,39 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Music Mankind</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Music Mankind Gallery</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
 </head>
 
 <body class="home-page">
 
-<nav>
-  <a href="/">Home</a>
-  <a href="/gallery">Gallery</a>
-  <a href="/music">Music</a>
-</nav>
+<div class="torus-background"></div>
 
-<h1 class="site-title">Music Mankind</h1>
+<header class="site-header">
 
-<div class="artist-grid">
+    <div class="logo">
+        <a href="/">Music Mankind</a>
+    </div>
 
-  <a href="/justin" class="artist-card">
-    <img src="{{ url_for('static', filename='Images/artist1.jpg') }}">
-    <h2>Justin.url</h2>
-  </a>
+    <nav class="main-nav">
 
-  <a href="/evan" class="artist-card">
-    <img src="{{ url_for('static', filename='Images/artist3.jpg') }}">
-    <h2>Evan Anderson</h2>
-  </a>
+        <a href="/">Home</a>
 
-  <a href="/fro-nea" class="artist-card">
-    <img src="{{ url_for('static', filename='Images/artist2.jpg') }}">
-    <h2>fro.nea</h2>
-  </a>
+        <a href="/gallery">Gallery</a>
 
-</div>
+        <a href="/audio-visualizer">
+            EQ Visualizer
+        </a>
+
+        {% if current_user.is_authenticated %}
+
+            <a href="/logout">Logout</a>
+
+        {% else %}
+
+            <a href="/signup">Create Account</a>
+
+            <a href="/login">Login</a>
+
+        {% endif %}
+
+    </nav>
+
+</header>
+
+<main class="home-page">
+
+    <div class="home-title">
+
+        <h1 class="main-home-title">
+            Upload To Music Mankind
+        </h1>
+
+        <h2>
+            Create Your Own Artist Card
+        </h2>
+
+    </div>
+
+    {% if current_user.is_authenticated %}
+
+    <div class="upload-wrapper">
+
+        <form
+            action="/upload_artist"
+            method="POST"
+            enctype="multipart/form-data"
+            class="artist-upload-form"
+        >
+
+            <input
+                type="text"
+                name="artist_name"
+                placeholder="Artist Name"
+                required
+            >
+
+            <input
+                type="text"
+                name="artist_role"
+                placeholder="Artist Role"
+                required
+            >
+
+            <textarea
+                name="artist_bio"
+                placeholder="Artist Bio"
+                rows="5"
+            ></textarea>
+
+            <label>
+                Upload JPG or PNG Image
+            </label>
+
+            <input
+                type="file"
+                name="artist_image"
+                accept=".jpg,.jpeg,.png"
+                required
+            >
+
+            <label>
+                Upload MP3 or M4A Audio
+            </label>
+
+            <input
+                type="file"
+                name="artist_audio"
+                accept=".mp3,.m4a"
+                required
+            >
+
+            <button type="submit">
+                Upload Artist
+            </button>
+
+        </form>
+
+    </div>
+
+    {% else %}
+
+    <div class="login-required-box">
+
+        <h2>
+            Create an account to upload music.
+        </h2>
+
+        <a href="/signup" class="signup-upload-btn">
+            Create Account
+        </a>
+
+    </div>
+
+    {% endif %}
+
+    <div class="artist-grid">
+
+        {% for upload in uploads %}
+
+        <div class="artist-card">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='Images/' + upload.image_filename
+                ) }}"
+            >
+
+            <h3>
+                {{ upload.artist_name }}
+            </h3>
+
+            <p>
+                {{ upload.artist_role }}
+            </p>
+
+            <p>
+                {{ upload.artist_bio }}
+            </p>
+
+            <audio controls>
+
+                <source
+                    src="{{ url_for(
+                        'static',
+                        filename='Audio/' + upload.audio_filename
+                    ) }}"
+                >
+
+            </audio>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</main>
 
 </body>
 </html>
