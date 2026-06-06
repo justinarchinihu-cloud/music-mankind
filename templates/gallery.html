@@ -1,25 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>Music Mankind Gallery</title>
+<title>Music Mankind Gallery</title>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+>
+```
 
 </head>
 
 <body class="home-page">
 
+```
 <div class="torus-background"></div>
 
 <header class="site-header">
@@ -33,6 +37,8 @@
         <a href="/">Home</a>
 
         <a href="/gallery">Gallery</a>
+
+        <a href="/music">Music Library</a>
 
         <a href="/audio-visualizer">
             EQ Visualizer
@@ -63,7 +69,7 @@
         </h1>
 
         <h2>
-            Create Your Own Artist Card
+            Upload Singles, EPs, and Albums
         </h2>
 
     </div>
@@ -93,6 +99,46 @@
                 required
             >
 
+            <input
+                type="text"
+                name="album_name"
+                placeholder="Release Name"
+                required
+            >
+
+            <input
+                type="date"
+                name="release_date"
+                required
+            >
+
+            <select
+                name="release_type"
+                required
+            >
+
+                <option value="">
+                    Select Release Type
+                </option>
+
+                <option value="single">
+                    Single (1 Track)
+                </option>
+
+                <option value="ep">
+                    EP (2–7 Tracks)
+                </option>
+
+                <option value="album">
+                    Album (8–12 Tracks)
+                </option>
+
+            </select>
+
+            <p class="upload-help">
+                Single = 1 track • EP = 2–7 tracks • Album = 8–12 tracks
+            </p>
+
             <textarea
                 name="artist_bio"
                 placeholder="Artist Bio"
@@ -100,7 +146,7 @@
             ></textarea>
 
             <label>
-                Upload JPG or PNG Image
+                Upload Cover Art
             </label>
 
             <input
@@ -111,18 +157,19 @@
             >
 
             <label>
-                Upload MP3 or M4A Audio
+                Upload Audio Files
             </label>
 
             <input
                 type="file"
                 name="artist_audio"
-                accept=".mp3,.m4a"
+                accept=".mp3,.m4a,.wav"
+                multiple
                 required
             >
 
             <button type="submit">
-                Upload Artist
+                Upload Release
             </button>
 
         </form>
@@ -137,7 +184,10 @@
             Create an account to upload music.
         </h2>
 
-        <a href="/signup" class="signup-upload-btn">
+        <a
+            href="/signup"
+            class="signup-upload-btn"
+        >
             Create Account
         </a>
 
@@ -156,6 +206,7 @@
                     'static',
                     filename='Images/' + upload.image_filename
                 ) }}"
+                alt="{{ upload.album_name }}"
             >
 
             <h3>
@@ -167,19 +218,48 @@
             </p>
 
             <p>
+                {{ upload.release_type|title }}
+            </p>
+
+            <p>
+                Release:
+                {{ upload.album_name }}
+            </p>
+
+            <p>
+                Released:
+                {{ upload.release_date.strftime('%B %d, %Y') }}
+            </p>
+
+            <p>
+                Tracks:
+                {{ upload.tracks|length }}
+            </p>
+
+            <p>
                 {{ upload.artist_bio }}
             </p>
 
-            <audio controls>
+            {% if upload.tracks %}
 
-                <source
-                    src="{{ url_for(
-                        'static',
-                        filename='Audio/' + upload.audio_filename
-                    ) }}"
-                >
+            <div class="track-list">
 
-            </audio>
+                <h4>
+                    Track List
+                </h4>
+
+                {% for track in upload.tracks %}
+
+                <p>
+                    {{ track.track_number }}.
+                    {{ track.title }}
+                </p>
+
+                {% endfor %}
+
+            </div>
+
+            {% endif %}
 
         </div>
 
@@ -188,6 +268,7 @@
     </div>
 
 </main>
+```
 
 </body>
 </html>

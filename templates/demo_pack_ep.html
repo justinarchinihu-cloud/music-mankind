@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="album-page">
+
+    <!-- BACK BUTTON -->
+    <a class="back-link" href="/artist1">
+        ← Back to Justin.url
+    </a>
+
+    <!-- HERO -->
+    <section class="album-hero">
+
+        <img
+            class="album-cover-large"
+            src="{{ url_for('static', filename='Images/Demopack.jpg') }}"
+            alt="Demo Pack EP">
+
+        <div class="album-info">
+
+            <p class="label">
+                EP
+            </p>
+
+            <h1>
+                Demo Pack EP
+            </h1>
+
+            <p class="subtitle">
+                Justin.url
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- TRACKLIST -->
+    <section class="tracklist">
+
+        <h2>
+            Tracklist
+        </h2>
+
+        <!-- TRACK 1 -->
+        <div class="track">
+
+            <p>
+                1. Summer In A Nutshell
+            </p>
+
+            <audio controls>
+
+                <source
+                    src="{{ url_for('static', filename='Audio/Summer in a Nutshell.mp3') }}"
+                    type="audio/mpeg">
+
+            </audio>
+
+        </div>
+
+        <!-- TRACK 2 -->
+        <div class="track">
+
+            <p>
+                2. Sincerely
+            </p>
+
+            <audio controls>
+
+                <source
+                    src="{{ url_for('static', filename='Audio/Sincerely Me(the Hate U Give).mp3') }}"
+                    type="audio/mpeg">
+
+            </audio>
+
+        </div>
+
+        <!-- TRACK 3 -->
+        <div class="track">
+
+            <p>
+                3. Poem For A Loved One
+            </p>
+
+            <audio controls>
+
+                <source
+                    src="{{ url_for('static', filename='Audio/Poem for a loved one _Letter to a friend.mp3') }}"
+                    type="audio/mpeg">
+
+            </audio>
+
+        </div>
+
+        <!-- TRACK 4 -->
+        <div class="track">
+
+            <p>
+                4. Worst Time Of The Year
+            </p>
+
+            <audio controls>
+
+                <source
+                    src="{{ url_for('static', filename='Audio/Worst Time of the Year.mp3') }}"
+                    type="audio/mpeg">
+
+            </audio>
+
+        </div>
+
+        <!-- TRACK 5 -->
+        <div class="track">
+
+            <p>
+                5. Change19
+            </p>
+
+            <audio controls>
+
+                <source
+                    src="{{ url_for('static', filename='Audio/Change19.mp3') }}"
+                    type="audio/mpeg">
+
+            </audio>
+
+        </div>
+
+    </section>
+
+    <!-- CREDITS -->
+    <section class="album-bio">
+
+        <h2>
+            Credits
+        </h2>
+
+        <p>
+            Bass, Production, Composition:
+            Justin.url
+        </p>
+
+    </section>
+
+</section>
+
+{% endblock %}

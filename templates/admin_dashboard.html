@@ -1,0 +1,64 @@
+<h1>Music Mankind Admin Dashboard</h1>
+
+<h2>Users</h2>
+
+{% for user in users %}
+
+<div>
+    {{ user.id }} -
+    {{ user.username }}
+
+    <form
+        action="{{ url_for('delete_user', user_id=user.id) }}"
+        method="POST"
+    >
+        <button type="submit">
+            Delete User
+        </button>
+    </form>
+</div>
+
+{% endfor %}
+
+<hr>
+
+<h2>Releases</h2>
+
+{% for release in releases %}
+
+<div>
+    {{ release.artist_name }}
+    -
+    {{ release.album_name }}
+
+    <form
+        action="{{ url_for('delete_release', release_id=release.id) }}"
+        method="POST"
+    >
+        <button type="submit">
+            Delete Release
+        </button>
+    </form>
+</div>
+
+{% endfor %}
+
+<hr>
+
+<form
+    action="{{ url_for('delete_all_users') }}"
+    method="POST"
+>
+    <button type="submit">
+        Delete All Users
+    </button>
+</form>
+
+<form
+    action="{{ url_for('delete_all_media') }}"
+    method="POST"
+>
+    <button type="submit">
+        Delete All Media
+    </button>
+</form>

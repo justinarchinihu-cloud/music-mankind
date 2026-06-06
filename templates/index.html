@@ -6,76 +6,164 @@
 
 <section class="home-page">
 
-    <!-- TORUS BACKGROUND -->
     <div class="torus-background"></div>
 
-    <!-- TITLE -->
     <div class="home-title">
 
         {% if current_user.is_authenticated %}
+
             <h1 class="welcome-user">
                 Welcome, {{ current_user.username }}
             </h1>
+
         {% else %}
+
             <h1 class="main-home-title">
                 Music Mankind
             </h1>
+
         {% endif %}
 
-        <h2>Your Library</h2>
+        <h2>
+            Latest Releases
+        </h2>
 
     </div>
 
-    <!-- ARTIST GRID -->
     <div class="artist-grid">
 
-        <!-- JUSTIN -->
-        <a class="artist-card" href="/artist1">
+        <!-- USER UPLOADS -->
+
+        {% for upload in uploads %}
+
+        <a
+            href="{{ url_for('release_page', release_id=upload.id) }}"
+            class="release-link"
+        >
+            <div class="artist-card">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='Images/' + upload.image_filename
+                    ) }}"
+                    alt="{{ upload.album_name }}"
+                >
+
+                <h3>
+                    {{ upload.artist_name }}
+                </h3>
+
+                <p>
+                    {{ upload.album_name }}
+                </p>
+
+                <p>
+                    {{ upload.release_type|title }}
+                </p>
+
+                <p>
+                    Released:
+                    {{ upload.release_date.strftime('%B %d, %Y') }}
+                </p>
+
+                <p>
+                    Tracks:
+                    {{ upload.tracks|length }}
+                </p>
+
+            </div>
+        </a>
+
+        {% endfor %}
+
+        <!-- FEATURED ARTISTS -->
+
+        <a
+            class="artist-card"
+            href="/artist1"
+        >
 
             <img
-                src="{{ url_for('static', filename='Images/artist1.jpg') }}"
-                alt="Justin.url">
+                src="{{ url_for(
+                    'static',
+                    filename='Images/artist1.jpg'
+                ) }}"
+                alt="Justin.url"
+            >
 
-            <h3>Justin.url</h3>
+            <h3>
+                Justin.url
+            </h3>
 
-            <p>Bassist • Jacksonville</p>
+            <p>
+                Bassist • Jacksonville
+            </p>
 
         </a>
 
-        <!-- EVAN -->
-        <a class="artist-card" href="/artist2">
+        <a
+            class="artist-card"
+            href="/artist2"
+        >
 
             <img
-                src="{{ url_for('static', filename='Images/artist3.jpg') }}"
-                alt="Evan Anderson">
+                src="{{ url_for(
+                    'static',
+                    filename='Images/artist3.jpg'
+                ) }}"
+                alt="Evan Anderson"
+            >
 
-            <h3>Evan Anderson</h3>
+            <h3>
+                Evan Anderson
+            </h3>
 
-            <p>Piano • Composer</p>
+            <p>
+                Piano • Composer
+            </p>
 
         </a>
 
-        <!-- FRO.NEA -->
-        <a class="artist-card" href="/artist3">
+        <a
+            class="artist-card"
+            href="/artist3"
+        >
 
             <img
-                src="{{ url_for('static', filename='Images/artist2.jpg') }}"
-                alt="fro.nea">
+                src="{{ url_for(
+                    'static',
+                    filename='Images/artist2.jpg'
+                ) }}"
+                alt="fro.nea"
+            >
 
-            <h3>fro.nea</h3>
+            <h3>
+                fro.nea
+            </h3>
 
-            <p>Visual Sound Collection</p>
+            <p>
+                Visual Sound Collection
+            </p>
 
         </a>
 
-        <!-- ESEOHE -->
-        <a class="artist-card" href="/artist4">
+        <a
+            class="artist-card"
+            href="/artist4"
+        >
 
             <img
-                src="{{ url_for('static', filename='Images/daniel.png') }}"
-                alt="Eseohe">
+                src="{{ url_for(
+                    'static',
+                    filename='Images/daniel.png'
+                ) }}"
+                alt="Eseohe"
+            >
 
-            <h3>Eseohe</h3>
+            <h3>
+                Eseohe
+            </h3>
 
             <p>
                 R&B • Producer • Songwriter
@@ -83,14 +171,20 @@
 
         </a>
 
-        <!-- CALVIN -->
-        <a class="artist-card" href="/calvin_nook">
+        <a
+            class="artist-card"
+            href="/calvin_nook"
+        >
 
             <div class="home-black-circle"></div>
 
-            <h3>calvin_nook</h3>
+            <h3>
+                calvin_nook
+            </h3>
 
-            <p>Short Story Collection</p>
+            <p>
+                Short Story Collection
+            </p>
 
         </a>
 

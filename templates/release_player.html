@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav>
+    <a href="{{ url_for('home') }}">
+        ← Back Home
+    </a>
+</nav>
+
+<div class="now-playing-container">
+
+    <div class="album-section">
+
+        <img
+            src="{{ url_for(
+                'static',
+                filename='Images/' + release.image_filename
+            ) }}"
+            class="now-playing-cover"
+        >
+
+        <h1>
+            {{ release.album_name }}
+        </h1>
+
+        <h2>
+            {{ release.artist_name }}
+        </h2>
+
+        <p>
+            {{ release.release_type }}
+        </p>
+
+        <p>
+            {{ release.artist_bio }}
+        </p>
+
+    </div>
+
+    <div class="track-section">
+
+        <h2>Tracks</h2>
+
+        {% for track in release.tracks %}
+
+        <div class="track-row">
+
+            <span>
+                {{ track.track_number }}
+            </span>
+
+            <span>
+                {{ track.title }}
+            </span>
+
+            <audio controls>
+
+                <source
+                    src="{{ url_for(
+                        'static',
+                        filename='Audio/' + track.filename
+                    ) }}"
+                >
+
+            </audio>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endblock %}
