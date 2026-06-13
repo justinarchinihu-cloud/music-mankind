@@ -2,64 +2,65 @@
 
 {% block content %}
 
+<a class="back-link" href="/">← Home</a>
+
 <section class="artist-profile-page">
 
-    <!-- BACK BUTTON -->
-    <a class="back-link" href="{{ url_for('home') }}">← Home</a>
-
-    <!-- ARTIST HERO -->
-    <section class="artist-hero darvin-hero">
+    <!-- HERO (MATCHES JUSTIN + EVAN SYSTEM) -->
+    <div class="artist-hero">
 
         <div class="artist-hero-overlay">
 
-            <div class="artist-avatar">
-                <img
-                    src="{{ url_for('static', filename=profile_image) }}"
-                    alt="Darvin">
-            </div>
+            <img class="artist-profile-pic"
+                 src="{{ url_for('static', filename='Images/darvin.jpg') }}"
+                 alt="Darvin">
 
-            <div class="artist-meta">
-
+            <div>
                 <p class="label">Artist</p>
-
-                <h1>{{ artist_name }}</h1>
-
-                <p>Electronic Soul • Producer • Storyteller</p>
-
-                <p>{{ location }}</p>
-
-                <p class="latest">
-                    Latest Releases: {{ latest_releases }}
+                <h1>Darvin</h1>
+                <p class="subtitle">Electronic Soul • Producer • Storyteller</p>
+                <p class="subtitle">Jacksonville</p>
+                <p class="subtitle">
+                    Latest Releases: Doomed / Kiss In The Wind MP3
                 </p>
-
             </div>
 
         </div>
 
-    </section>
+    </div>
 
-    <!-- SONG SECTION -->
-    <section class="release-section">
+    <!-- ALBUMS / SINGLES (FIXED AUDIO PATHS) -->
+    <section class="albums-section">
 
         <h2>Singles</h2>
 
-        <div class="release-list">
+        <!-- TRACK 1 -->
+        <div class="album-card">
 
-            {% for song in songs %}
-            <article class="release-card">
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/doomed.mp3') }}" type="audio/mpeg">
+                Your browser does not support audio playback.
+            </audio>
 
-                <h3>{{ song.title }}</h3>
+            <div class="album-info">
+                <h3>Doomed</h3>
+                <p>Single</p>
+            </div>
 
-                <p>{{ song.release_type | title }}</p>
+        </div>
 
-                <audio
-                    controls
-                    preload="metadata"
-                    src="{{ url_for('static', filename=song.filename) }}">
-                </audio>
+        <!-- TRACK 2 -->
+        <div class="album-card">
 
-            </article>
-            {% endfor %}
+            <audio controls>
+                <source src="{{ url_for('static', filename='Audio/kiss in the wind kiss in the wind.mp3') }}" type="audio/mpeg">
+                Your browser does not support audio playback.
+            </audio>
+
+            <div class="album-info">
+                <h3>Kiss In The Wind</h3>
+                <p>Single</p>
+            </div>
 
         </div>
 
