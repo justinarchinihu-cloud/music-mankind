@@ -1,5 +1,3 @@
-<!-- templates/index.html -->
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -121,6 +119,29 @@
 
             <p>
                 Piano • Composer
+            </p>
+
+        </a>
+
+        <a
+            class="artist-card"
+            href="/darvin"
+        >
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='Images/darvin.jpg'
+                ) }}"
+                alt="Darvin"
+            >
+
+            <h3>
+                Darvin
+            </h3>
+
+            <p>
+                Electronic Soul • Producer
             </p>
 
         </a>

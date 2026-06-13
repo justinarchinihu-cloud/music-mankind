@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ artist_name }} | Music Mankind</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="rocklee-page">
+  <div class="torus-background"></div>
+
+  <header class="site-header">
+    <div class="logo">
+      <a href="{{ url_for('home') }}">Music Mankind</a>
+    </div>
+    <nav class="main-nav">
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('gallery') }}">Gallery</a>
+      <a href="{{ url_for('music') }}">Music</a>
+      <a href="{{ url_for('audio_visualizer') }}">EQ Visualizer</a>
+      <a href="{{ url_for('my_library') }}">My Library</a>
+      <a href="{{ url_for('videos') }}">Videos</a>
+      <a href="{{ url_for('about') }}">About</a>
+    </nav>
+  </header>
+
+  <div class="page-shell">
+    <main class="page-inner">
+      <section class="artist-hero">
+        <div class="artist-avatar">
+          <img src="{{ url_for('static', filename=profile_image) }}" alt="{{ artist_name }}">
+        </div>
+        <div class="artist-meta">
+          <h1>{{ artist_name }}</h1>
+          <p>{{ artist_genre }}</p>
+          <p>{{ location }}</p>
+          <p class="latest">Latest Releases: {{ latest_releases }}</p>
+        </div>
+      </section>
+
+      <section class="release-section">
+        <h2>Featured Tracks</h2>
+        <div class="release-list">
+          {% for song in songs %}
+          <article class="release-card">
+            <h3>{{ song.title }}</h3>
+            <p>{{ song.release_type | title }}</p>
+            <audio controls preload="metadata" src="{{ url_for('static', filename=song.filename) }}">
+              Your browser does not support the audio element.
+            </audio>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      {% if videos %}
+      <section class="release-section">
+        <h2>Video Works</h2>
+        <div class="release-list">
+          {% for video in videos %}
+          <article class="release-card">
+            <h3>{{ video.title }}</h3>
+            <p>{{ video.description }}</p>
+            <video controls width="100%" src="{{ url_for('static', filename=video.filename) }}"></video>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Upload Video | Music Mankind</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="darvin-page">
+  <div class="torus-background"></div>
+
+  <header class="site-header">
+    <div class="logo">
+      <a href="{{ url_for('home') }}">Music Mankind</a>
+    </div>
+    <nav class="main-nav">
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('gallery') }}">Gallery</a>
+      <a href="{{ url_for('music') }}">Music</a>
+      <a href="{{ url_for('audio_visualizer') }}">EQ Visualizer</a>
+      <a href="{{ url_for('my_library') }}">My Library</a>
+      <a href="{{ url_for('videos') }}">Videos</a>
+      <a href="{{ url_for('about') }}">About</a>
+    </nav>
+  </header>
+
+  <main class="artist-profile-page">
+    <section class="artist-hero">
+      <div class="artist-avatar">
+        <img src="{{ url_for('static', filename=profile_image) }}" alt="{{ artist_name }}">
+      </div>
+      <div class="artist-meta">
+        <h1>{{ artist_name }}</h1>
+        <p>{{ location }}</p>
+        <p class="latest">Latest Releases: {{ latest_releases }}</p>
+      </div>
+    </section>
+
+    <section class="albums-section">
+      <h2>Upload Video</h2>
+      <div class="upload-wrapper">
+        <form class="artist-upload-form" action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
+          <label for="video_title">Video Title</label>
+          <input id="video_title" name="video_title" type="text" placeholder="Enter video title" required>
+
+          <label for="video_description">Description</label>
+          <textarea id="video_description" name="video_description" placeholder="Add a short description" rows="5" required></textarea>
+
+          <label for="video_file">Select Video File</label>
+          <input id="video_file" name="video_file" type="file" accept="video/*" required>
+
+          <button type="submit">Upload Video</button>
+        </form>
+      </div>
+    </section>
+
+    {% if videos %}
+    <section class="albums-section">
+      <h2>Uploaded Videos</h2>
+      <div class="release-list">
+        {% for video in videos %}
+        <article class="release-card">
+          <h3>{{ video.title }}</h3>
+          <p>{{ video.description }}</p>
+          <video controls width="100%" src="{{ url_for('static', filename=video.filename) }}"></video>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  </main>
+</body>
+</html>
