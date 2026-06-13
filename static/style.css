@@ -1326,24 +1326,16 @@ img {
     }
 
 }
-
-/* =====================================
-   DARVIN PAGE (FIXED)
+    /* =====================================
+       DARVIN PAGE
 ===================================== */
 
 .darvin-page .artist-hero {
-    display: grid;
-    grid-template-columns: minmax(240px, 260px) 1fr;
-    gap: 32px;
-    align-items: center;
-    padding: 34px;
-    border-radius: 32px;
-    background: rgba(10, 10, 11, 0.28);
-    border: 1px solid rgba(255,255,255,0.12);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+    .darvin-hero-bg {
+    background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.45)),
+        url("Images/torus.gif");
+    background-size: cover;
+    background-position: center;
 }
-
-.darvin-hero-bg {
-    background: transparent;
 }
