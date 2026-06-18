@@ -388,7 +388,7 @@ def audio_visualizer():
 
                 "file": f"Audio/{track.filename}",
 
-                "cover": f"Images/{release.image_filename}"
+                "cover": f"images/{release.image_filename}"
 
             })
 
@@ -401,7 +401,7 @@ def audio_visualizer():
             "release_type": "album",
             "release_date": "January 1, 2025",
             "file": "Audio/drum_and_bass.m4a",
-            "cover": "Images/Man_Vs_Machine_cover.jpg"
+            "cover": "images/Man_Vs_Machine_cover.jpg"
         },
 
         {
@@ -411,7 +411,7 @@ def audio_visualizer():
             "release_type": "album",
             "release_date": "January 1, 2025",
             "file": "Audio/everything_i_need.m4a",
-            "cover": "Images/Man_Vs_Machine_cover.jpg"
+            "cover": "images/Man_Vs_Machine_cover.jpg"
         },
 
         {
@@ -421,7 +421,7 @@ def audio_visualizer():
             "release_type": "ep",
             "release_date": "January 1, 2025",
             "file": "Audio/Summer in a Nutshell.mp3",
-            "cover": "Images/Demopack.jpg"
+            "cover": "images/Demopack.jpg"
         }
 
     ])
@@ -885,7 +885,7 @@ def upload_artist():
 
     image.save(
         os.path.join(
-            "static/Images",
+            "static/images",
             image_filename
         )
     )
@@ -1174,7 +1174,7 @@ def delete_user(user_id):
             image_path = os.path.join(
                 app.root_path,
                 "static",
-                "Images",
+                "images",
                 release.image_filename
             )
 
@@ -1285,7 +1285,7 @@ def delete_release(release_id):
         image_path = os.path.join(
             app.root_path,
             "static",
-            "Images",
+            "images",
             release.image_filename
         )
 
@@ -1363,7 +1363,7 @@ def delete_all_users():
                 image_path = os.path.join(
                     app.root_path,
                     "static",
-                    "Images",
+                    "images",
                     release.image_filename
                 )
 
@@ -1431,7 +1431,7 @@ def delete_all_media():
             image_path = os.path.join(
                 app.root_path,
                 "static",
-                "Images",
+                "images",
                 release.image_filename
             )
 
@@ -1505,7 +1505,7 @@ def videos():
 
     return render_template(
         "video.html",
-        profile_image="Images/darvin.JPG",
+       
         artist_name="Darvin",
         location="Jacksonville",
         latest_releases="Doomed / Kiss In The Wind MP3",
@@ -1538,8 +1538,8 @@ def darvin():
         artist_name="Darvin",
         location="Jacksonville",
         latest_releases="Doomed / Kiss In The Wind MP3",
-        cover_image="Images/darvin.JPG",
-        profile_image="Images/darvin.JPG",
+        cover_image="images/darvin.JPG",
+        profile_image="images/darvin.JPG",
         songs=songs
     )
 
