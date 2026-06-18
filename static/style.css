@@ -70,7 +70,7 @@ body {
 .torus-background {
     position: fixed;
     inset: 0;
-    background-image: url("Images/torus.gif");
+    background-image: url("images/torus.gif");
     background-size: cover;
     background-position: center;
     opacity: 0.18;
