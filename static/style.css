@@ -1190,7 +1190,7 @@ img {
 .torus-background {
     position: fixed;
     inset: 0;
-    background-image: url("/static/Images/torus.gif");
+    background-image: url("/static/images/torus.gif");
     background-size: cover;
     background-position: center;
     opacity: 0.18;
@@ -1342,7 +1342,7 @@ img {
 .darvin-hero-bg {
     background:
         linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.45)),
-        url("Images/torus.gif");
+        url("images/torus.gif");
     background-size: cover;
     background-position: center;
 }
