@@ -191,7 +191,7 @@ body {
             rgba(0,0,0,0.55),
             rgba(0,0,0,0.45)
         ),
-        url("Images/torus.gif");
+        url("images/torus.gif");
     background-size: cover;
     background-position: center;
 }
