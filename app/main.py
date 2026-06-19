@@ -1543,7 +1543,32 @@ def darvin():
         songs=songs
     )
 
+    
+@app.route("/rocklee")
+def rocklee():
 
+    songs = [
+        {
+            "title": "body2",
+            "release_type": "single",
+            "filename": "Audio/body2 by rocklee.m4a"
+        },
+        {
+            "title": "body3",
+            "release_type": "single",
+            "filename": "Audio/body3 by rocklee.m4a"
+        }
+    ]
+
+    return render_template(
+        "rocklee.html",
+        artist_name="Rocklee",
+        location="Jacksonville",
+        latest_releases="body2",
+        cover_image="images/rocklee.jpg",
+        profile_image="images/rocklee.jpg",
+        songs=songs
+    )
 # =====================================
 # RUN APP
 # =====================================

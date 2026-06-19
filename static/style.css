@@ -1346,3 +1346,10 @@ img {
     background-size: cover;
     background-position: center;
 }
+.rocklee-hero-bg {
+    background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.45)),
+        url("images/torus.gif");
+    background-size: cover;
+    background-position: center;
+}
