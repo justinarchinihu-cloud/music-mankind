@@ -1335,8 +1335,11 @@ img {
 .artist-hero-overlay {
     display: flex;
     align-items: center;
-    gap: 40px;
+    justify-content: flex-start;
+    gap: 60px;
     padding: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .darvin-hero-bg {
@@ -1352,4 +1355,13 @@ img {
         url("images/torus.gif");
     background-size: cover;
     background-position: center;
+}
+.visualizer-panel {
+    background: rgba(255,255,255,0.05);
+    border-radius: 24px;
+    padding: 32px;
+    .albums-section {
+    max-width: 900px;
+    margin: 0 auto 60px auto;
+}
 }

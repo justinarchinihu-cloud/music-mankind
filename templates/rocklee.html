@@ -2,53 +2,84 @@
 
 {% block content %}
 
-<a class="back-link" href="/">← Home</a>
-
 <section class="artist-profile-page">
 
-    <!-- HERO (MATCHES JUSTIN + EVAN SYSTEM) -->
-    <div class="artist-hero rocklee"></div>
+    <a class="back-link" href="/">← Home</a>
+
+    <!-- HERO -->
+    <section class="artist-hero rocklee">
 
         <div class="artist-hero-overlay">
 
-            <img class="artist-profile-pic"
-                 src="{{ url_for('static', filename='images/rocklee.jpg') }}"
-                 alt="Darvin">
+            <img
+                class="artist-profile-pic"
+                src="/static/images/rocklee.jpg"
+                alt="rocklee"
+            >
 
-            <div>
+            <div class="artist-hero-text">
+
                 <p class="label">Artist</p>
+
                 <h1>rocklee</h1>
-                <p class="subtitle">Electronic Soul • Producer • Storyteller</p>
-                <p class="subtitle">Orlando, FL</p>
+
+                <p class="subtitle">
+                    Electronic Soul • Producer • Storyteller
+                </p>
+
+                <p class="subtitle">
+                    Orlando, FL
+                </p>
+
                 <p class="subtitle">
                     Latest Releases: body2
                 </p>
+
             </div>
 
         </div>
 
-    </div>
+    </section>
 
-    <!-- ALBUMS / SINGLES (FIXED AUDIO PATHS) -->
+    <!-- SINGLES -->
     <section class="albums-section">
 
         <h2>Singles</h2>
 
-        <!-- TRACK 1 -->
-        <div class="album-card">
+        <div class="media-card">
 
             <audio controls>
-                <source src="{{ url_for('static', filename='Audio/body2.m4a') }}" type="audio/mpeg">
+                <source src="/static/Audio/body2.m4a" type="audio/mp4">
                 Your browser does not support audio playback.
             </audio>
 
             <div class="album-info">
+
                 <h3>body2</h3>
                 <p>Single</p>
+
             </div>
 
         </div>
-    </section>  
+
+    </section>
+
+    <!-- VIDEO -->
+    <section class="albums-section">
+
+        <h2>Video</h2>
+
+        <div class="visualizer-panel">
+
+            <video
+                controls
+                playsinline
+                preload="metadata"
+                style="width: 100%; max-width: 900px; border-radius: 20px; display: block; margin: 0 auto;"
+            >
+                <source src="/static/video/rocklee-video.mp4" type="video/mp4">
+                Your browser does not support video playback.
+            </video>
 
         </div>
 
