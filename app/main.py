@@ -729,22 +729,6 @@ def logout():
     return redirect(
         url_for("home")
     )
-
-@app.route("/logout")
-@login_required
-def logout():
-
-    logout_user()
-
-    flash(
-        "Logged out."
-    )
-
-    return redirect(
-        url_for("home")
-    )
-
-
 # =====================================
 # PURCHASE
 # =====================================
@@ -1639,8 +1623,10 @@ def rocklee():
 # RUN APP
 # =====================================
 
+if __name__ == "__main__":
 
     with app.app_context():
+
         db.create_all()
 
         admin_user = User.query.filter_by(
@@ -1648,22 +1634,13 @@ def rocklee():
         ).first()
 
         if admin_user:
+
             admin_user.is_admin = True
+
             db.session.commit()
 
-    
-@app.route("/radio")
-def radio():
-    return render_template("radio.html")
-
-
-if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-
-        admin_user = User.query.filter_by(username="Admin101").first()
-        if admin_user:
-            admin_user.is_admin = True
-            db.session.commit()
-
-    app.run(host="127.0.0.1", port=5001, debug=True)
+    app.run(
+        host="127.0.0.1",
+        port=5001,
+        debug=True
+    )
