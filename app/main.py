@@ -358,7 +358,6 @@ def gallery():
 # =====================================
 # AUDIO VISUALIZER
 # =====================================
-
 @app.route("/audio-visualizer")
 def audio_visualizer():
 
@@ -394,6 +393,10 @@ def audio_visualizer():
 
     songs.extend([
 
+        # =====================================
+        # MAN VS. MACHINE
+        # =====================================
+
         {
             "title": "Drum And Bass",
             "artist": "Justin.url",
@@ -415,13 +418,67 @@ def audio_visualizer():
         },
 
         {
+            "title": "When I See You",
+            "artist": "Justin.url",
+            "album": "Man Vs. Machine",
+            "release_type": "album",
+            "release_date": "January 1, 2025",
+            "file": "Audio/when_i_see_you.mp4",
+            "cover": "images/Man_Vs_Machine_cover.jpg"
+        },
+
+        # =====================================
+        # DEMO PACK EP / 2019 EP
+        # =====================================
+
+        {
             "title": "Summer In A Nutshell",
             "artist": "Justin.url",
             "album": "Demo Pack EP",
             "release_type": "ep",
             "release_date": "January 1, 2025",
             "file": "Audio/Summer in a Nutshell.mp3",
-            "cover": "images/Demopack.jpg"
+            "cover": "images/2019_EP.jpg"
+        },
+
+        {
+            "title": "Sincerely",
+            "artist": "Justin.url",
+            "album": "Demo Pack EP",
+            "release_type": "ep",
+            "release_date": "January 1, 2025",
+            "file": "Audio/Sincerely Me(the Hate U Give).mp3",
+            "cover": "images/2019_EP.jpg"
+        },
+
+        {
+            "title": "Poem For A Loved One",
+            "artist": "Justin.url",
+            "album": "Demo Pack EP",
+            "release_type": "ep",
+            "release_date": "January 1, 2025",
+            "file": "Audio/Poem for a loved one _Letter to a friend.mp3",
+            "cover": "images/2019_EP.jpg"
+        },
+
+        {
+            "title": "Worst Time Of The Year",
+            "artist": "Justin.url",
+            "album": "Demo Pack EP",
+            "release_type": "ep",
+            "release_date": "January 1, 2025",
+            "file": "Audio/Worst Time of the Year.mp3",
+            "cover": "images/2019_EP.jpg"
+        },
+
+        {
+            "title": "Change19",
+            "artist": "Justin.url",
+            "album": "Demo Pack EP",
+            "release_type": "ep",
+            "release_date": "January 1, 2025",
+            "file": "Audio/Change19.mp3",
+            "cover": "images/2019_EP.jpg"
         }
 
     ])
@@ -472,30 +529,6 @@ def artist4():
 # ALBUM PAGES
 # =====================================
 
-@app.route("/calvin_nook")
-def calvin_nook():
-
-    return render_template(
-        "calvin_nook.html"
-    )
-
-
-@app.route("/half-it-all")
-def half_it_all():
-
-    return render_template(
-        "half_it_all.html"
-    )
-
-
-@app.route("/unspoken-master")
-def unspoken_master():
-
-    return render_template(
-        "unspoken_master.html"
-    )
-
-
 @app.route("/man-vs-machine")
 def man_vs_machine():
 
@@ -508,21 +541,8 @@ def man_vs_machine():
 def demo_pack_ep():
 
     return render_template(
-        "demo_pack_ep.html"
+        "2019.ep.html"
     )
-
-
-# =====================================
-# ABOUT
-# =====================================
-
-@app.route("/about")
-def about():
-
-    return render_template(
-        "about_us.html"
-    )
-
 
 # =====================================
 # SIGNUP
