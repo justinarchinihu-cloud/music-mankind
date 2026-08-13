@@ -361,9 +361,9 @@ def audio_visualizer():
 
     songs = []
 
-    # -------------------------------------
+    # =====================================
     # DATABASE RELEASES
-    # -------------------------------------
+    # =====================================
 
     releases = Release.query.order_by(
         Release.created_at.desc()
@@ -374,29 +374,21 @@ def audio_visualizer():
         for track in release.tracks:
 
             songs.append({
-
                 "title": track.title,
-
                 "artist": release.artist_name,
-
                 "album": release.album_name,
-
                 "release_type": release.release_type,
-
                 "release_date": release.release_date.strftime(
                     "%B %d, %Y"
                 ),
-
                 "file": f"Audio/{track.filename}",
-
                 "cover": f"images/{release.image_filename}"
-
             })
 
 
-    # -------------------------------------
+    # =====================================
     # MAN VS. MACHINE
-    # -------------------------------------
+    # =====================================
 
     songs.extend([
 
@@ -406,7 +398,7 @@ def audio_visualizer():
             "album": "Man Vs. Machine",
             "release_type": "album",
             "release_date": "January 1, 2025",
-            "file": "Audio/drum_and_bass.m4a",
+            "file": "Audio/drum_and_bass.mp3",
             "cover": "images/Man_Vs_Machine_cover.jpg"
         },
 
@@ -426,7 +418,7 @@ def audio_visualizer():
             "album": "Man Vs. Machine",
             "release_type": "album",
             "release_date": "January 1, 2025",
-            "file": "Audio/when_i_see_you.mp4",
+            "file": "Audio/when_i_see_you.mp3",
             "cover": "images/Man_Vs_Machine_cover.jpg"
         },
 
@@ -436,14 +428,14 @@ def audio_visualizer():
             "album": "Man Vs. Machine",
             "release_type": "album",
             "release_date": "January 1, 2025",
-            "file": "Audio/red_and_yellow.mp4",
+            "file": "Audio/red_and_yellow.mp3",
             "cover": "images/Man_Vs_Machine_cover.jpg"
         },
 
 
-        # -------------------------------------
+        # =====================================
         # DEMO PACK EP / 2019 EP
-        # -------------------------------------
+        # =====================================
 
         {
             "title": "Summer In A Nutshell",
@@ -498,9 +490,9 @@ def audio_visualizer():
     ])
 
 
-    # -------------------------------------
-    # SEND SONGS TO TEMPLATE
-    # -------------------------------------
+    # =====================================
+    # RENDER PAGE
+    # =====================================
 
     return render_template(
         "audio_visualizer.html",
