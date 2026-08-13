@@ -96,7 +96,7 @@
       <div class="grid">
         {% for r in releases %}
         <article class="release-card">
-          <img src="{{ url_for('static', filename='Images/' ~ r.image_filename) }}" alt="{{ r.album_name }}">
+          <img src="{{ url_for('static', filename='images/' ~ r.image_filename) }}" alt="{{ r.album_name }}">
           <div class="meta">
             <h4>{{ r.album_name }}</h4>
             <p>{{ r.release_type | title }} — {{ r.artist_name }}</p>

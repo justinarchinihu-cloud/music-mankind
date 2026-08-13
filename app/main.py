@@ -1588,8 +1588,8 @@ def darvin():
         artist_name="Darvin",
         location="Jacksonville",
         latest_releases="Doomed / Kiss In The Wind MP3",
-        cover_image="images/darvin.JPG",
-        profile_image="images/darvin.JPG",
+        cover_image="images/darvin.jpg",
+        profile_image="images/darvin.jpg",
         songs=songs
     )
 
