@@ -1561,6 +1561,4 @@ if __name__ == "__main__":
             admin_user.is_admin = True
             db.session.commit()
 
-    app.run(
-        debug=True
-    )
+app.run(host="127.0.0.1", port=5001, debug=True)

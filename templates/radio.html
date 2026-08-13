@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="radio-page">
+
+    <h1 class="radio-title">🎵 Music Mankind Radio</h1>
+
+    <p class="subtitle">
+        Explore music across the world
+    </p>
+
+    <div class="radio-layout">
+
+        <!-- 🌍 EARTH GLOBE -->
+        <div class="globe-container">
+            <div id="scene-container"></div>
+        </div>
+
+        <!-- 📻 STATIONS PANEL -->
+        <div class="stations-panel">
+
+            <h2 id="regionTitle">Stations</h2>
+
+            <div id="stations"></div>
+
+        </div>
+
+    </div>
+
+    <!-- 🎧 PLAYER -->
+    <div class="player-bar">
+        <audio id="radioAudio" controls></audio>
+    </div>
+
+</section>
+
+<!-- =========================
+     SCRIPTS (IMPORTANT ORDER)
+========================= -->
+
+<!-- Three.js -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+
+<!-- Your radio logic -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+{% endblock %}

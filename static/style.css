@@ -463,6 +463,10 @@ body {
     padding: 32px;
 }
 
+.albums-section {
+    max-width: 900px;
+    margin: 0 auto 60px auto;
+}
 /* SONG CARDS */
 
 .song-card-grid {
@@ -1364,4 +1368,1441 @@ img {
     max-width: 900px;
     margin: 0 auto 60px auto;
 }
+}
+.radio-page {
+    padding: 40px 60px;
+    position: relative;
+    z-index: 2;
+}
+
+/* 🧱 MAIN LAYOUT */
+.radio-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* 🌍 GLOBE AREA */
+.globe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.globe {
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    position: relative;
+
+    background: radial-gradient(circle at center,
+        rgba(255,0,0,0.2),
+        rgba(0,0,0,0.95)
+    );
+
+    border: 1px solid rgba(255,0,0,0.35);
+    overflow: hidden;
+
+    box-shadow: 0 0 60px rgba(255,0,0,0.08);
+}
+
+/* rotating grid */
+.globe::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        repeating-radial-gradient(circle,
+            rgba(255,0,0,0.15) 0px,
+            transparent 6px,
+            transparent 14px
+        );
+
+    animation: spin 25s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 🌍 REGION BUTTONS */
+.region {
+    position: absolute;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    border: 1px solid rgba(255,0,0,0.5);
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.region:hover {
+    background: red;
+    transform: scale(1.05);
+}
+
+/* positions */
+.region[data-region="europe"] { top: 35%; left: 20%; }
+.region[data-region="northamerica"] { top: 25%; left: 45%; }
+.region[data-region="asia"] { top: 40%; left: 70%; }
+.region[data-region="africa"] { top: 55%; left: 45%; }
+.region[data-region="southamerica"] { top: 65%; left: 30%; }
+.region[data-region="oceania"] { top: 75%; left: 70%; }
+
+/* center text */
+.globe-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* 📻 STATION PANEL */
+.stations-panel {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,0,0,0.2);
+    border-radius: 16px;
+    padding: 20px;
+    height: 520px;
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+}
+
+/* station buttons */
+#stations button {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 10px;
+
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,0,0,0.15);
+    color: white;
+
+    border-radius: 10px;
+    text-align: left;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#stations button:hover {
+    background: rgba(255,0,0,0.2);
+    transform: translateX(4px);
+}
+
+/* optional player spacing */
+.player-bar {
+    margin-top: 20px;
+}#scene-container {
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    overflow: hidden;
+}/* =========================================================
+   MUSIC MANKIND
+   MOBILE / APP-STYLE RESPONSIVE OVERHAUL
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   GLOBAL MOBILE SAFETY
+   --------------------------------------------------------- */
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+}
+
+* {
+    max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+img,
+video,
+canvas {
+    max-width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+    /* HEADER */
+
+    .site-header {
+        padding: 18px 24px;
+    }
+
+    .logo {
+        margin-bottom: 14px;
+    }
+
+    .logo a {
+        font-size: 2.3rem;
+    }
+
+    .main-nav {
+        gap: 12px 18px;
+    }
+
+    .main-nav a {
+        font-size: 0.95rem;
+    }
+
+
+    /* HOME */
+
+    .home-page {
+        padding: 40px 24px 80px;
+    }
+
+    .main-home-title {
+        font-size: clamp(4rem, 10vw, 6rem);
+    }
+
+    .welcome-user {
+        font-size: clamp(2.5rem, 7vw, 4rem);
+    }
+
+    .home-title h2 {
+        font-size: 1.8rem;
+    }
+
+
+    /* ARTISTS */
+
+    .artist-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .artist-card {
+        max-width: 100%;
+        padding: 18px;
+    }
+
+    .artist-card img,
+    .home-black-circle {
+        width: 150px;
+        height: 150px;
+    }
+
+
+    /* ARTIST PROFILE */
+
+    .artist-profile-page {
+        padding: 30px 24px 70px;
+    }
+
+    .artist-hero-overlay {
+        padding: 36px 28px;
+        gap: 28px;
+    }
+
+    .artist-profile-pic,
+    .black-profile-circle {
+        width: 170px;
+        height: 170px;
+    }
+
+    .artist-hero-text h1,
+    .artist-hero-overlay h1 {
+        font-size: clamp(2.8rem, 8vw, 4rem);
+    }
+
+
+    /* ALBUM */
+
+    .album-page {
+        padding: 30px 24px 70px;
+    }
+
+    .album-hero,
+    .album-header {
+        gap: 28px;
+    }
+
+    .album-cover-large {
+        width: min(100%, 360px);
+        height: auto;
+    }
+
+    .album-info h1,
+    .album-header h1 {
+        font-size: clamp(2.8rem, 8vw, 4rem);
+    }
+
+    .album-card {
+        max-width: 100%;
+    }
+
+
+    /* VISUALIZER */
+
+    .visualizer-page {
+        padding: 30px 24px 70px;
+    }
+
+    .visualizer-header h1 {
+        font-size: clamp(2.8rem, 8vw, 4rem);
+    }
+
+    .visualizer-panel {
+        padding: 22px;
+    }
+
+    .song-card-grid {
+        justify-content: center;
+    }
+
+    .visualizer-song-card {
+        width: min(100%, 320px);
+    }
+
+    .now-playing-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .now-playing-cover {
+        width: 220px;
+        height: 220px;
+    }
+
+    #visualizer {
+        height: 260px;
+    }
+
+
+    /* RADIO */
+
+    .radio-page {
+        padding: 30px 24px 70px;
+    }
+
+    .radio-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .globe {
+        width: min(80vw, 400px);
+        height: min(80vw, 400px);
+    }
+
+    #scene-container {
+        width: min(80vw, 400px);
+        height: min(80vw, 400px);
+    }
+
+    .stations-panel {
+        height: 450px;
+    }
+
+
+    /* ABOUT */
+
+    .about-overlay {
+        padding: 100px 30px 60px;
+    }
+
+    .about-title {
+        font-size: clamp(3.5rem, 10vw, 6rem);
+    }
+
+
+    /* MUSIC LIBRARY */
+
+    .music-library-overlay {
+        padding: 100px 25px 60px;
+    }
+
+    .music-library-title {
+        font-size: clamp(3.5rem, 10vw, 5rem);
+    }
+
+    .music-results-grid {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(220px, 1fr)
+        );
+        gap: 24px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   PHONE
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    /* =====================================================
+       GLOBAL
+       ===================================================== */
+
+    body {
+        font-size: 16px;
+    }
+
+    main {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+
+    /* =====================================================
+       MOBILE HEADER
+       ===================================================== */
+
+    .site-header {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        padding: 14px 16px;
+        background: rgba(5, 5, 5, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    .logo {
+        margin-bottom: 12px;
+    }
+
+    .logo a {
+        font-size: 1.8rem;
+        letter-spacing: -0.8px;
+    }
+
+    .main-nav {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+    }
+
+    .main-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .main-nav a {
+        flex: 0 0 auto;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.07);
+        font-size: 0.82rem;
+        white-space: nowrap;
+    }
+
+    .main-nav a:active {
+        background: rgba(255,255,255,0.16);
+    }
+
+
+    /* =====================================================
+       HOME PAGE
+       ===================================================== */
+
+    .home-page {
+        min-height: calc(100vh - 100px);
+        padding: 30px 16px 100px;
+    }
+
+    .torus-background {
+        background-position: center;
+        opacity: 0.12;
+    }
+
+    .home-title {
+        margin-bottom: 32px;
+    }
+
+    .main-home-title {
+        font-size: clamp(3.2rem, 16vw, 5rem);
+        line-height: 0.88;
+        letter-spacing: -2.5px;
+        margin-bottom: 16px;
+        overflow-wrap: anywhere;
+    }
+
+    .welcome-user {
+        font-size: clamp(2rem, 10vw, 3.2rem);
+        line-height: 0.95;
+        letter-spacing: -1px;
+    }
+
+    .home-title h2 {
+        font-size: 1.25rem;
+        line-height: 1.3;
+    }
+
+
+    /* =====================================================
+       ARTIST GRID
+       ===================================================== */
+
+    .artist-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        width: 100%;
+    }
+
+    .artist-card {
+        width: 100%;
+        max-width: none;
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .artist-card img,
+    .home-black-circle {
+        width: min(55vw, 180px);
+        height: min(55vw, 180px);
+        margin-bottom: 16px;
+    }
+
+    .artist-card h3 {
+        font-size: 1.4rem;
+    }
+
+    .artist-card p {
+        font-size: 0.9rem;
+    }
+
+
+    /* =====================================================
+       ARTIST PROFILE
+       ===================================================== */
+
+    .artist-profile-page {
+        padding: 24px 16px 100px;
+    }
+
+    .artist-hero {
+        border-radius: 20px;
+        margin-bottom: 35px;
+    }
+
+    .artist-hero-overlay {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+        padding: 28px 20px;
+    }
+
+    .artist-profile-pic,
+    .black-profile-circle {
+        width: min(60vw, 190px);
+        height: min(60vw, 190px);
+    }
+
+    .artist-hero-text .label,
+    .artist-hero-overlay .label {
+        font-size: 0.9rem;
+    }
+
+    .artist-hero-text h1,
+    .artist-hero-overlay h1 {
+        font-size: clamp(2.7rem, 14vw, 4rem);
+        line-height: 0.9;
+        letter-spacing: -2px;
+        overflow-wrap: anywhere;
+    }
+
+    .artist-hero-text .subtitle,
+    .artist-hero-overlay .subtitle {
+        font-size: 1rem;
+    }
+
+
+    /* =====================================================
+       ALBUM SECTION
+       ===================================================== */
+
+    .albums-section h2 {
+        font-size: 1.7rem;
+        margin-bottom: 18px;
+    }
+
+    .album-card {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .album-cover {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        border-radius: 14px;
+    }
+
+    .album-card .album-info h3 {
+        font-size: 1.5rem;
+    }
+
+    .album-card .album-info p {
+        font-size: 0.95rem;
+    }
+
+
+    /* =====================================================
+       ALBUM PAGE
+       ===================================================== */
+
+    .album-page {
+        padding: 24px 16px 100px;
+    }
+
+    .back-link {
+        margin-bottom: 35px;
+        font-size: 1rem;
+    }
+
+    .album-hero,
+    .album-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+        margin-bottom: 40px;
+    }
+
+    .album-cover-large {
+        width: 100%;
+        max-width: none;
+        aspect-ratio: 1 / 1;
+        height: auto;
+        border-radius: 16px;
+    }
+
+    .album-info {
+        width: 100%;
+    }
+
+    .album-info h1,
+    .album-header h1 {
+        font-size: clamp(2.7rem, 13vw, 4rem);
+        line-height: 0.9;
+        letter-spacing: -2px;
+        overflow-wrap: anywhere;
+    }
+
+    .album-info .label,
+    .album-header .label {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    .album-info .subtitle,
+    .album-header .subtitle {
+        font-size: 1rem;
+    }
+
+
+    /* =====================================================
+       TRACK LIST
+       ===================================================== */
+
+    .tracklist {
+        margin-top: 25px;
+    }
+
+    .tracklist h2,
+    .album-bio h2,
+    .album-extra h2 {
+        font-size: 1.6rem;
+        margin-bottom: 18px;
+    }
+
+    .track {
+        padding: 16px;
+        border-radius: 14px;
+        margin-bottom: 12px;
+    }
+
+    .track p,
+    .track span {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .track audio {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .album-bio,
+    .album-extra {
+        margin-top: 40px;
+    }
+
+    .album-bio p,
+    .album-extra p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+
+    /* =====================================================
+       VISUALIZER / EQ
+       ===================================================== */
+
+    .visualizer-page {
+        padding: 24px 16px 100px;
+    }
+
+    .visualizer-header {
+        margin-bottom: 28px;
+    }
+
+    .visualizer-label {
+        font-size: 0.9rem;
+    }
+
+    .visualizer-header h1 {
+        font-size: clamp(2.7rem, 13vw, 4rem);
+        line-height: 0.9;
+        letter-spacing: -2px;
+    }
+
+    .visualizer-subtitle {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .visualizer-panel {
+        padding: 14px;
+        border-radius: 18px;
+    }
+
+    .visualizer-section-title {
+        font-size: 1.5rem;
+        margin-bottom: 18px;
+    }
+
+
+    /* SONG CARDS */
+
+    .song-card-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        width: 100%;
+    }
+
+    .visualizer-song-card {
+        width: 100%;
+        max-width: none;
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .visualizer-song-card:hover {
+        transform: none;
+    }
+
+    .visualizer-song-cover {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin-bottom: 16px;
+        border-radius: 14px;
+    }
+
+    .visualizer-song-info h3 {
+        font-size: 1.35rem;
+    }
+
+    .visualizer-song-info p {
+        font-size: 0.95rem;
+    }
+
+
+    /* NOW PLAYING */
+
+    .now-playing-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .now-playing-cover {
+        width: 100%;
+        max-width: none;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        border-radius: 14px;
+    }
+
+    .now-playing-label {
+        font-size: 0.8rem;
+    }
+
+    #currentSongTitle {
+        font-size: 1.5rem;
+    }
+
+    #currentSongArtist,
+    #currentSongAlbum {
+        font-size: 0.95rem;
+    }
+
+    #audioPlayer {
+        width: 100%;
+        margin-bottom: 22px;
+    }
+
+
+    /* EQ CONTROLS */
+
+    .eq-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 22px;
+    }
+
+    .eq-controls label {
+        width: 100%;
+        min-width: 0;
+        padding: 16px;
+        border-radius: 14px;
+        font-size: 1rem;
+    }
+
+    .eq-controls span {
+        font-size: 0.85rem;
+    }
+
+    .eq-controls input {
+        width: 100%;
+        min-height: 30px;
+    }
+
+    #visualizer {
+        width: 100%;
+        height: 200px;
+        border-radius: 14px;
+    }
+
+
+    /* =====================================================
+       EQ DROP ZONE
+       ===================================================== */
+
+    .eq-drop-zone {
+        padding: 28px 16px;
+        border-radius: 16px;
+        font-size: 1rem;
+    }
+
+
+    /* =====================================================
+       RADIO
+       ===================================================== */
+
+    .radio-page {
+        padding: 24px 16px 100px;
+    }
+
+    .radio-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        width: 100%;
+    }
+
+    .globe-container {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .globe {
+        width: min(88vw, 360px);
+        height: min(88vw, 360px);
+    }
+
+    #scene-container {
+        width: min(88vw, 360px);
+        height: min(88vw, 360px);
+    }
+
+    .stations-panel {
+        width: 100%;
+        height: 420px;
+        padding: 14px;
+        border-radius: 16px;
+    }
+
+    #stations button {
+        min-height: 50px;
+        padding: 13px;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+    }
+
+    .region {
+        padding: 5px 8px;
+        font-size: 9px;
+    }
+
+
+    /* =====================================================
+       GALLERY
+       ===================================================== */
+
+    .gallery-page {
+        width: 100%;
+        padding: 24px 16px 100px;
+    }
+
+    .gallery-page h1 {
+        font-size: clamp(3.2rem, 16vw, 5rem);
+        line-height: 0.9;
+        letter-spacing: -2px;
+    }
+
+    .gallery-page h2 {
+        font-size: 1.8rem;
+        line-height: 1;
+        margin-bottom: 28px;
+    }
+
+    .upload-wrapper {
+        width: 100%;
+        max-width: none;
+    }
+
+    .artist-upload-form {
+        width: 100%;
+        padding: 18px;
+        border-radius: 18px;
+    }
+
+    .artist-upload-form input,
+    .artist-upload-form textarea {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    .artist-upload-form textarea {
+        min-height: 150px;
+    }
+
+    .artist-upload-form button {
+        width: 100%;
+        min-height: 50px;
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .login-required-box {
+        width: 100%;
+        padding: 24px 18px;
+        border-radius: 18px;
+    }
+
+
+    /* =====================================================
+       ABOUT
+       ===================================================== */
+
+    .about-page {
+        width: 100%;
+    }
+
+    .about-overlay {
+        padding: 70px 18px 100px;
+    }
+
+    .about-hero {
+        margin-bottom: 40px;
+    }
+
+    .about-title {
+        font-size: clamp(3.2rem, 16vw, 5rem);
+        line-height: 0.9;
+        letter-spacing: -2px;
+        overflow-wrap: anywhere;
+    }
+
+    .about-subtitle {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .about-content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .about-card {
+        min-width: 0;
+        width: 100%;
+        padding: 24px 18px;
+        border-radius: 20px;
+    }
+
+    .about-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .about-card p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+
+    /* =====================================================
+       MUSIC LIBRARY
+       ===================================================== */
+
+    .music-library-page {
+        width: 100%;
+    }
+
+    .music-library-overlay {
+        padding: 70px 16px 100px;
+    }
+
+    .music-library-header {
+        margin-bottom: 28px;
+    }
+
+    .music-library-title {
+        font-size: clamp(3.2rem, 15vw, 5rem);
+        line-height: 0.9;
+        letter-spacing: -2px;
+        overflow-wrap: anywhere;
+    }
+
+    .music-library-subtitle {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .music-search-container {
+        margin-bottom: 30px;
+    }
+
+    .music-search-container input {
+        width: 100%;
+        max-width: none;
+        padding: 15px 18px;
+        min-height: 50px;
+        font-size: 16px;
+        border-radius: 16px;
+    }
+
+    .music-results-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .music-song-card {
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    .music-song-card:hover {
+        transform: none;
+    }
+
+    .music-song-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+
+    .music-song-info {
+        padding: 18px;
+    }
+
+    .music-song-info h2 {
+        font-size: 1.4rem;
+    }
+
+
+    /* =====================================================
+       WRITER / STORY
+       ===================================================== */
+
+    .story-card {
+        width: 100%;
+        padding: 24px 18px;
+        border-radius: 20px;
+    }
+
+    .story-card h2 {
+        font-size: 1.8rem;
+    }
+
+    .story-text p {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+
+    /* =====================================================
+       AUDIO CONTROLS
+       ===================================================== */
+
+    audio {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    audio::-webkit-media-controls-panel {
+        background-color: #eeeeee;
+    }
+
+
+    /* =====================================================
+       TOUCH TARGETS
+       ===================================================== */
+
+    button,
+    .main-nav a,
+    .back-link,
+    .signup-upload-btn {
+        min-height: 44px;
+    }
+
+
+    /* =====================================================
+       REMOVE DESKTOP HOVER EFFECTS
+       ===================================================== */
+
+    .artist-card:hover,
+    .album-card:hover,
+    .visualizer-song-card:hover,
+    .music-song-card:hover {
+        transform: none;
+    }
+
+
+    /* =====================================================
+       MOBILE SCROLLING
+       ===================================================== */
+
+    .tracklist,
+    .stations-panel {
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    /* =====================================================
+       SAFE AREA FOR IPHONE
+       ===================================================== */
+
+    .site-header {
+        padding-top: max(
+            14px,
+            env(safe-area-inset-top)
+        );
+    }
+
+    .home-page,
+    .album-page,
+    .artist-profile-page,
+    .visualizer-page,
+    .radio-page,
+    .gallery-page,
+    .about-overlay,
+    .music-library-overlay {
+        padding-bottom: max(
+            100px,
+            calc(70px + env(safe-area-inset-bottom))
+        );
+    }
+}
+
+
+/* ---------------------------------------------------------
+   VERY SMALL PHONES
+   --------------------------------------------------------- */
+
+@media (max-width: 380px) {
+
+    .logo a {
+        font-size: 1.6rem;
+    }
+
+    .main-home-title {
+        font-size: 3rem;
+    }
+
+    .welcome-user {
+        font-size: 2rem;
+    }
+
+    .artist-card img,
+    .home-black-circle {
+        width: 140px;
+        height: 140px;
+    }
+
+    .artist-hero-text h1,
+    .artist-hero-overlay h1,
+    .album-info h1,
+    .album-header h1,
+    .visualizer-header h1,
+    .about-title,
+    .music-library-title {
+        font-size: 2.7rem;
+    }
+
+    .globe {
+        width: 290px;
+        height: 290px;
+    }
+
+    #scene-container {
+        width: 290px;
+        height: 290px;
+    }
+
+    #visualizer {
+        height: 170px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   LANDSCAPE PHONE
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+    .site-header {
+        position: relative;
+    }
+
+    .home-page {
+        padding-top: 30px;
+    }
+
+    .artist-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .radio-layout {
+        grid-template-columns: 1fr 1fr;
+        display: grid;
+    }
+
+    .globe {
+        width: 300px;
+        height: 300px;
+    }
+
+    #scene-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .stations-panel {
+        height: 350px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   APP-LIKE INTERACTION
+   --------------------------------------------------------- */
+
+@media (hover: none) {
+
+    .artist-card:hover,
+    .album-card:hover,
+    .visualizer-song-card:hover,
+    .music-song-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .artist-card:active,
+    .album-card:active,
+    .visualizer-song-card:active,
+    .music-song-card:active {
+        transform: scale(0.98);
+    }
+
+    .main-nav a:active {
+        transform: scale(0.96);
+    }
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE MUSIC PLAYER
+   --------------------------------------------------------- */
+
+/*
+   If you later add a persistent player with:
+   
+   <div class="mobile-player">
+   
+   this styling is ready for it.
+*/
+
+.mobile-player {
+    display: none;
+}
+
+@media (max-width: 600px) {
+
+    .mobile-player {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        bottom: max(
+            10px,
+            env(safe-area-inset-bottom)
+        );
+        z-index: 9999;
+
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        padding: 10px 12px;
+
+        background: rgba(15,15,15,0.94);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 18px;
+
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        box-shadow:
+            0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .mobile-player img {
+        width: 46px;
+        height: 46px;
+        flex: 0 0 46px;
+
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .mobile-player-info {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .mobile-player-title {
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 800;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .mobile-player-artist {
+        color: #999;
+        font-size: 0.75rem;
+        margin-top: 3px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .mobile-player button {
+        width: 42px;
+        height: 42px;
+        min-height: 42px;
+
+        border: none;
+        border-radius: 50%;
+
+        background: white;
+        color: black;
+
+        font-size: 1rem;
+        cursor: pointer;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   PREVENT CONTENT FROM HIDING BEHIND PLAYER
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    body:has(.mobile-player) {
+        padding-bottom: 90px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   REDUCE MOTION FOR USERS WHO REQUEST IT
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
