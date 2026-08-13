@@ -318,9 +318,6 @@ def home():
     )
 
 
-app.add_url_rule("/", endpoint="index", view_func=home)
-
-
 # =====================================
 # MUSIC PAGE
 # =====================================
@@ -358,6 +355,7 @@ def gallery():
 # =====================================
 # AUDIO VISUALIZER
 # =====================================
+
 @app.route("/audio-visualizer")
 def audio_visualizer():
 
@@ -391,11 +389,12 @@ def audio_visualizer():
 
             })
 
-    songs.extend([
 
-        # =====================================
-        # MAN VS. MACHINE
-        # =====================================
+    # =====================================
+    # MAN VS. MACHINE
+    # =====================================
+
+    songs.extend([
 
         {
             "title": "Drum And Bass",
@@ -426,6 +425,17 @@ def audio_visualizer():
             "file": "Audio/when_i_see_you.mp4",
             "cover": "images/Man_Vs_Machine_cover.jpg"
         },
+
+        {
+            "title": "Red And Yellow",
+            "artist": "Justin.url",
+            "album": "Man Vs. Machine",
+            "release_type": "album",
+            "release_date": "January 1, 2025",
+            "file": "Audio/red_and_yellow.mp4",
+            "cover": "images/Man_Vs_Machine_cover.jpg"
+        },
+
 
         # =====================================
         # DEMO PACK EP / 2019 EP
@@ -483,9 +493,22 @@ def audio_visualizer():
 
     ])
 
+
     return render_template(
         "audio_visualizer.html",
         songs=songs
+    )
+
+
+# =====================================
+# RADIO
+# =====================================
+
+@app.route("/radio")
+def radio():
+
+    return render_template(
+        "radio.html"
     )
 
 
@@ -543,6 +566,15 @@ def demo_pack_ep():
     return render_template(
         "2019.ep.html"
     )
+
+
+@app.route("/half-it-all")
+def half_it_all():
+
+    return render_template(
+        "half_it_all.html"
+    )
+
 
 # =====================================
 # SIGNUP
@@ -683,6 +715,20 @@ def login():
 # =====================================
 # LOGOUT
 # =====================================
+
+@app.route("/logout")
+@login_required
+def logout():
+
+    logout_user()
+
+    flash(
+        "Logged out."
+    )
+
+    return redirect(
+        url_for("home")
+    )
 
 @app.route("/logout")
 @login_required
