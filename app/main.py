@@ -361,6 +361,10 @@ def audio_visualizer():
 
     songs = []
 
+    # -------------------------------------
+    # DATABASE RELEASES
+    # -------------------------------------
+
     releases = Release.query.order_by(
         Release.created_at.desc()
     ).all()
@@ -390,9 +394,9 @@ def audio_visualizer():
             })
 
 
-    # =====================================
+    # -------------------------------------
     # MAN VS. MACHINE
-    # =====================================
+    # -------------------------------------
 
     songs.extend([
 
@@ -412,7 +416,7 @@ def audio_visualizer():
             "album": "Man Vs. Machine",
             "release_type": "album",
             "release_date": "January 1, 2025",
-            "file": "Audio/everything_i_need.m4a",
+            "file": "Audio/everything_i_need.mp3",
             "cover": "images/Man_Vs_Machine_cover.jpg"
         },
 
@@ -437,9 +441,9 @@ def audio_visualizer():
         },
 
 
-        # =====================================
+        # -------------------------------------
         # DEMO PACK EP / 2019 EP
-        # =====================================
+        # -------------------------------------
 
         {
             "title": "Summer In A Nutshell",
@@ -493,6 +497,10 @@ def audio_visualizer():
 
     ])
 
+
+    # -------------------------------------
+    # SEND SONGS TO TEMPLATE
+    # -------------------------------------
 
     return render_template(
         "audio_visualizer.html",
