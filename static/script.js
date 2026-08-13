@@ -1,166 +1,485 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-/* =========================
-   ELEMENTS
-========================= */
+    /* =========================
+       ELEMENTS
+    ========================= */
 
-const stationsDiv = document.getElementById("stations");
-const radioAudio = document.getElementById("radioAudio");
-const regionTitle = document.getElementById("regionTitle");
-const sceneContainer = document.getElementById("scene-container");
+    const stationsDiv = document.getElementById("stations");
+    const radioAudio = document.getElementById("radioAudio");
+    const regionTitle = document.getElementById("regionTitle");
+    const sceneContainer = document.getElementById("scene-container");
 
-/* =========================
-   SAFETY CHECKS
-========================= */
 
-if (!sceneContainer) {
-    console.error("❌ Missing #scene-container in HTML");
-    return;
-}
+    /* =========================
+       SAFETY CHECKS
+    ========================= */
 
-if (!window.THREE) {
-    console.error("❌ Three.js not loaded");
-    return;
-}
+    if (!stationsDiv || !radioAudio || !regionTitle || !sceneContainer) {
+        console.error("Radio HTML elements are missing.");
+        return;
+    }
 
-/* =========================
-   REGION DATA
-========================= */
+    if (!window.THREE) {
+        console.error("Three.js not loaded.");
+        return;
+    }
 
-const regions = {
-    europe: { lat: 50, lon: 10, tag: "jazz" },
-    northamerica: { lat: 40, lon: -100, tag: "rock" },
-    asia: { lat: 30, lon: 100, tag: "pop" },
-    africa: { lat: 0, lon: 20, tag: "afrobeat" },
-    southamerica: { lat: -15, lon: -60, tag: "latin" },
-    oceania: { lat: -25, lon: 135, tag: "electronic" }
-};
 
-/* =========================
-   RADIO SYSTEM
-========================= */
+    /* =========================
+       REGION DATA
+    ========================= */
 
-function loadRegion(regionKey) {
+    const regions = {
 
-    const region = regions[regionKey];
-    if (!region) return;
+        europe: {
+            lat: 50,
+            lon: 10,
+            tag: "jazz"
+        },
 
-    regionTitle.textContent = regionKey.toUpperCase();
+        northamerica: {
+            lat: 40,
+            lon: -100,
+            tag: "rock"
+        },
 
-    fetch(`https://de1.api.radio-browser.info/json/stations/bytag/${region.tag}`)
-        .then(res => res.json())
-        .then(data => renderStations(data.slice(0, 12)))
-        .catch(err => console.error("API error:", err));
-}
+        asia: {
+            lat: 30,
+            lon: 100,
+            tag: "pop"
+        },
 
-function renderStations(stations) {
+        africa: {
+            lat: 0,
+            lon: 20,
+            tag: "afrobeat"
+        },
 
-    stationsDiv.innerHTML = "";
+        southamerica: {
+            lat: -15,
+            lon: -60,
+            tag: "latin"
+        },
 
-    stations.forEach(station => {
+        oceania: {
+            lat: -25,
+            lon: 135,
+            tag: "electronic"
+        }
 
-        const btn = document.createElement("button");
-        btn.textContent = station.name;
+    };
 
-        btn.onclick = () => {
+
+    /* =========================
+       RADIO API SERVERS
+    ========================= */
+
+    const radioServers = [
+
+        "https://de1.api.radio-browser.info",
+
+        "https://nl1.api.radio-browser.info",
+
+        "https://at1.api.radio-browser.info"
+
+    ];
+
+
+    /* =========================
+       LOAD REGION
+    ========================= */
+
+    async function loadRegion(regionKey) {
+
+        const region = regions[regionKey];
+
+        if (!region) {
+            console.error("Unknown region:", regionKey);
+            return;
+        }
+
+        regionTitle.textContent =
+            regionKey.charAt(0).toUpperCase() +
+            regionKey.slice(1);
+
+        stationsDiv.innerHTML = `
+            <p class="radio-status">
+                Loading ${region.tag} stations...
+            </p>
+        `;
+
+
+        let stations = null;
+
+
+        for (const server of radioServers) {
+
+            try {
+
+                const response = await fetch(
+                    `${server}/json/stations/bytag/${encodeURIComponent(region.tag)}?limit=20&hidebroken=true`
+                );
+
+
+                if (!response.ok) {
+                    throw new Error(
+                        `HTTP ${response.status}`
+                    );
+                }
+
+
+                const data = await response.json();
+
+                if (Array.isArray(data) && data.length > 0) {
+
+                    stations = data;
+
+                    break;
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    `Radio server failed: ${server}`,
+                    error
+                );
+
+            }
+
+        }
+
+
+        if (!stations || stations.length === 0) {
+
+            stationsDiv.innerHTML = `
+                <p class="radio-status">
+                    No stations could be loaded right now.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        renderStations(stations.slice(0, 12));
+
+    }
+
+
+    /* =========================
+       RENDER STATIONS
+    ========================= */
+
+    function renderStations(stations) {
+
+        stationsDiv.innerHTML = "";
+
+
+        stations.forEach((station) => {
+
+            if (!station.url_resolved) {
+                return;
+            }
+
+
+            const btn = document.createElement("button");
+
+            btn.type = "button";
+
+            btn.className = "radio-station";
+
+            btn.textContent =
+                station.name || "Unknown Station";
+
+
+            btn.addEventListener("click", async () => {
+
+                await playStation(
+                    station.url_resolved,
+                    station.name
+                );
+
+            });
+
+
+            stationsDiv.appendChild(btn);
+
+        });
+
+
+        if (!stationsDiv.children.length) {
+
+            stationsDiv.innerHTML = `
+                <p class="radio-status">
+                    No playable stations found.
+                </p>
+            `;
+
+        }
+
+    }
+
+
+    /* =========================
+       PLAY STATION
+    ========================= */
+
+    async function playStation(url, stationName) {
+
+        if (!url) {
+            return;
+        }
+
+
+        try {
 
             radioAudio.pause();
-            radioAudio.src = station.url_resolved;
 
-            radioAudio.play().catch(err => {
-                console.error("Playback error:", err);
-            });
-        };
+            radioAudio.removeAttribute("src");
 
-        stationsDiv.appendChild(btn);
-    });
-}
+            radioAudio.load();
 
-/* =========================
-   THREE.JS SETUP
-========================= */
+            radioAudio.src = url;
 
-const scene = new THREE.Scene();
+            radioAudio.load();
 
-const camera = new THREE.PerspectiveCamera(
-    75,
-    1,
-    0.1,
-    1000
-);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+            await radioAudio.play();
 
-/* FIXED SIZE */
-const size = 450;
-renderer.setSize(size, size);
 
-sceneContainer.appendChild(renderer.domElement);
+            regionTitle.textContent =
+                stationName || "Music Mankind Radio";
 
-/* =========================
-   LIGHTING
-========================= */
 
-const light = new THREE.DirectionalLight(0xffffff, 1.5);
-light.position.set(5, 3, 5);
-scene.add(light);
+        } catch (error) {
 
-/* =========================
-   EARTH
-========================= */
+            console.error(
+                "Radio playback error:",
+                error
+            );
 
-const earth = new THREE.Mesh(
-    new THREE.SphereGeometry(2.5, 64, 64),
-    new THREE.MeshStandardMaterial({
-        color: 0x111111,
-        wireframe: true
-    })
-);
+            regionTitle.textContent =
+                "Unable to play station";
 
-scene.add(earth);
+        }
 
-camera.position.z = 6;
+    }
 
-/* =========================
-   CLICK SYSTEM
-========================= */
 
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
+    /* =========================
+       THREE.JS SETUP
+    ========================= */
 
-renderer.domElement.addEventListener("click", (event) => {
+    const scene = new THREE.Scene();
 
-    const rect = renderer.domElement.getBoundingClientRect();
 
-    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    const camera = new THREE.PerspectiveCamera(
+        75,
+        1,
+        0.1,
+        1000
+    );
 
-    raycaster.setFromCamera(mouse, camera);
 
-    const hits = raycaster.intersectObject(earth);
+    const renderer =
+        new THREE.WebGLRenderer({
+            antialias: true,
+            alpha: true
+        });
 
-    if (!hits.length) return;
 
-    /* SIMPLE REGION PICK (STABLE VERSION) */
-    const keys = Object.keys(regions);
-    const selected = keys[Math.floor(Math.random() * keys.length)];
+    /* =========================
+       RESPONSIVE GLOBE SIZE
+    ========================= */
 
-    loadRegion(selected);
+    function getGlobeSize() {
+
+        const width =
+            sceneContainer.clientWidth || 450;
+
+        return Math.min(width, 450);
+
+    }
+
+
+    function resizeGlobe() {
+
+        const size = getGlobeSize();
+
+        renderer.setSize(
+            size,
+            size
+        );
+
+
+        camera.aspect = 1;
+
+        camera.updateProjectionMatrix();
+
+    }
+
+
+    sceneContainer.appendChild(
+        renderer.domElement
+    );
+
+
+    resizeGlobe();
+
+    window.addEventListener(
+        "resize",
+        resizeGlobe
+    );
+
+
+    /* =========================
+       LIGHTING
+    ========================= */
+
+    const light =
+        new THREE.DirectionalLight(
+            0xffffff,
+            1.5
+        );
+
+
+    light.position.set(
+        5,
+        3,
+        5
+    );
+
+
+    scene.add(light);
+
+
+    /* =========================
+       EARTH
+    ========================= */
+
+    const earth =
+        new THREE.Mesh(
+
+            new THREE.SphereGeometry(
+                2.5,
+                64,
+                64
+            ),
+
+            new THREE.MeshStandardMaterial({
+
+                color: 0x111111,
+
+                wireframe: true
+
+            })
+
+        );
+
+
+    scene.add(earth);
+
+
+    camera.position.z = 6;
+
+
+    /* =========================
+       CLICK SYSTEM
+    ========================= */
+
+    const raycaster =
+        new THREE.Raycaster();
+
+
+    const mouse =
+        new THREE.Vector2();
+
+
+    renderer.domElement.addEventListener(
+        "click",
+        (event) => {
+
+            const rect =
+                renderer.domElement
+                    .getBoundingClientRect();
+
+
+            mouse.x =
+                ((event.clientX - rect.left)
+                    / rect.width) * 2 - 1;
+
+
+            mouse.y =
+                -((event.clientY - rect.top)
+                    / rect.height) * 2 + 1;
+
+
+            raycaster.setFromCamera(
+                mouse,
+                camera
+            );
+
+
+            const hits =
+                raycaster.intersectObject(
+                    earth
+                );
+
+
+            if (!hits.length) {
+                return;
+            }
+
+
+            const keys =
+                Object.keys(regions);
+
+
+            const selected =
+                keys[
+                    Math.floor(
+                        Math.random() *
+                        keys.length
+                    )
+                ];
+
+
+            loadRegion(selected);
+
+        }
+    );
+
+
+    /* =========================
+       ANIMATION
+    ========================= */
+
+    function animate() {
+
+        requestAnimationFrame(
+            animate
+        );
+
+
+        earth.rotation.y += 0.003;
+
+
+        renderer.render(
+            scene,
+            camera
+        );
+
+    }
+
+
+    animate();
+
+
+    /* =========================
+       INITIAL STATIONS
+    ========================= */
+
+    loadRegion("northamerica");
+
 });
-
-/* =========================
-   ANIMATION LOOP
-========================= */
-
-function animate() {
-
-    requestAnimationFrame(animate);
-
-    earth.rotation.y += 0.003;
-
-    renderer.render(scene, camera);
-}
-
-animate();
-
-}); 
